@@ -7,7 +7,9 @@ import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.*
+import androidx.ui.material.EmphasisLevels
 import androidx.ui.material.MaterialTheme
+import androidx.ui.material.ProvideEmphasis
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.material.surface.Card
 import androidx.ui.tooling.preview.Preview
@@ -39,22 +41,27 @@ fun FeedList(data: List<FeedItem>, onItemClick: (FeedItem) -> Unit) {
 @Composable
 private fun ListItem(item: FeedItem, onClick: () -> Unit) {
     val typography = MaterialTheme.typography()
+    val emphasisLevels = EmphasisLevels()
     Card(shape = RoundedCornerShape(8.dp), elevation = 4.dp, modifier = LayoutWidth.Fill + LayoutPadding(8.dp)) {
         Ripple(bounded = true) {
             Clickable(onClick = onClick) {
                 Column(modifier = LayoutWidth.Fill) {
-                    Text(
-                        text = item.title,
-                        style = typography.h6
-                    )
-
+                    ProvideEmphasis(emphasis = emphasisLevels.high) {
+                        Text(
+                            text = item.title,
+                            style = typography.h6
+                        )
+                    }
+                    
                     Spacer(modifier = LayoutHeight(8.dp))
 
-                    Text(
-                        text = item.contentPreview,
-                        style = typography.body2,
-                        maxLines = 5
-                    )
+                    ProvideEmphasis(emphasis = emphasisLevels.medium) {
+                        Text(
+                            text = item.contentPreview,
+                            style = typography.body2,
+                            maxLines = 5
+                        )
+                    }
                 }
             }
         }
