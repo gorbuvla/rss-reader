@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
+import androidx.ui.foundation.AdapterList
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
@@ -41,14 +42,7 @@ class FeedListActivity : AppCompatActivity() {
                             CircularProgressIndicator()
                         }
                         is ViewState.Loaded -> {
-                            VerticalScroller {
-                                Column {
-                                    state.data.forEach { item ->
-                                        ListItem(item = item) { openDetail(item) }
-                                        Divider(color = Color.Blue, height = 1.dp)
-                                    }
-                                }
-                            }
+                            FeedList(data = state.data, onItemClick = ::openDetail)
                         }
                         is ViewState.Error -> {
                             Snackbar(
@@ -77,6 +71,23 @@ class FeedListActivity : AppCompatActivity() {
     }
 }
 
+/**
+ * Uses [VerticalScrolled] instead of [AdapterList] because later was introduced in dev05 and has a lot of issues
+ * @see https://issuetracker.google.com/issues/149976090
+ */
+@Composable
+private fun FeedList(data: List<FeedItem>, onItemClick: (FeedItem) -> Unit) {
+    VerticalScroller {
+        Column {
+            data.forEach {  item ->
+                ListItem(item = item, onClick = { onItemClick(item) })
+            }
+
+            Spacer(modifier = LayoutHeight(16.dp))
+        }
+    }
+}
+
 @Composable
 private fun ListItem(item: FeedItem, onClick: () -> Unit) {
     val typography = MaterialTheme.typography()
@@ -89,7 +100,7 @@ private fun ListItem(item: FeedItem, onClick: () -> Unit) {
                         style = typography.h6
                     )
 
-                    Spacer(modifier = LayoutHeight(16.dp))
+                    Spacer(modifier = LayoutHeight(8.dp))
 
                     Text(
                         text = item.contentPreview,
@@ -101,3 +112,30 @@ private fun ListItem(item: FeedItem, onClick: () -> Unit) {
         }
     }
 }
+
+//@Composable
+//private fun FeedList(data: List<FeedItem>, onItemClick: (FeedItem) -> Unit) {
+//    val typography = MaterialTheme.typography()
+//    AdapterList(data = data) { item ->
+//        Card(shape = RoundedCornerShape(8.dp), elevation = 4.dp, modifier = LayoutWidth.Fill + LayoutPadding(8.dp)) {
+//            Ripple(bounded = true) {
+//                Clickable(onClick = { onItemClick(item) }) {
+//                    Column(modifier = LayoutWidth.Fill) {
+//                        Text(
+//                            text = item.title,
+//                            style = typography.h6
+//                        )
+//
+//                        Spacer(modifier = LayoutHeight(16.dp))
+//
+//                        Text(
+//                            text = item.contentPreview,
+//                            style = typography.body2,
+//                            maxLines = 5
+//                        )
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
