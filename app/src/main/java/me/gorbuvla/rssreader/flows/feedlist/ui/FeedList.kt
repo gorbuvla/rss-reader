@@ -56,7 +56,7 @@ private fun ListItem(item: FeedItem, onClick: () -> Unit) {
                         ProvideEmphasis(emphasis = emphasisLevels.high) {
                             Text(
                                 text = item.title,
-                                style = typography.h6
+                                style = typography.subtitle1
                             )
                         }
 

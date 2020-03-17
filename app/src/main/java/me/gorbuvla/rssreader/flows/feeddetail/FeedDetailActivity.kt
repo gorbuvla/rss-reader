@@ -8,6 +8,9 @@ import androidx.ui.core.setContent
 import androidx.ui.layout.Column
 import androidx.ui.material.*
 import me.gorbuvla.rssreader.base.ViewState
+import me.gorbuvla.rssreader.components.CircularProgress
+import me.gorbuvla.rssreader.components.RetrySnackbar
+import me.gorbuvla.rssreader.flows.feeddetail.ui.FeedDetailContent
 import me.gorbuvla.rssreader.util.observe
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.DefinitionParameters
@@ -38,25 +41,9 @@ class FeedDetailActivity : AppCompatActivity() {
                 TopAppBar(title = { Text(text = "Detail") })
 
                 when (val state = observe(data = viewModel.state)) {
-                    is ViewState.Loading -> {
-                        CircularProgressIndicator()
-                    }
-                    is ViewState.Loaded -> {
-                        Text(text = state.data.title)
-                    }
-                    is ViewState.Error -> {
-                        Snackbar(
-                            text = { Text(text = state.error.localizedMessage ?: "Error") },
-                            action = {
-                                TextButton(
-                                    contentColor = snackbarPrimaryColorFor(MaterialTheme.colors()),
-                                    onClick = { viewModel.retry() }
-                                ) {
-                                    Text("Retry")
-                                }
-                            }
-                        )
-                    }
+                    is ViewState.Loading -> CircularProgress()
+                    is ViewState.Loaded -> FeedDetailContent(data = state.data)
+                    is ViewState.Error -> RetrySnackbar(text = state.error.localizedMessage ?: "Error") { viewModel.retry() }
                 }
             }
         }
