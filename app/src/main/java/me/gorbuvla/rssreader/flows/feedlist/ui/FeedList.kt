@@ -38,6 +38,12 @@ fun FeedList(data: List<FeedItem>, onItemClick: (FeedItem) -> Unit) {
     }
 }
 
+/**
+ * Notice nested [Column]s inside clickable, unfortunately this is required as of now (dev06) in order for [Ripple] to be applied on whole surface.
+ * @see https://issuetracker.google.com/issues/150060763
+ * Mister Grandmaster David also asked about it
+ * @see https://kotlinlang.slack.com/archives/CJLTWPH7S/p1577177259047300?thread_ts=1577177259.047300
+ */
 @Composable
 private fun ListItem(item: FeedItem, onClick: () -> Unit) {
     val typography = MaterialTheme.typography()
@@ -45,22 +51,24 @@ private fun ListItem(item: FeedItem, onClick: () -> Unit) {
     Card(shape = RoundedCornerShape(8.dp), elevation = 4.dp, modifier = LayoutWidth.Fill + LayoutPadding(8.dp)) {
         Ripple(bounded = true) {
             Clickable(onClick = onClick) {
-                Column(modifier = LayoutWidth.Fill) {
-                    ProvideEmphasis(emphasis = emphasisLevels.high) {
-                        Text(
-                            text = item.title,
-                            style = typography.h6
-                        )
-                    }
-                    
-                    Spacer(modifier = LayoutHeight(8.dp))
+                Column {
+                    Column(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
+                        ProvideEmphasis(emphasis = emphasisLevels.high) {
+                            Text(
+                                text = item.title,
+                                style = typography.h6
+                            )
+                        }
 
-                    ProvideEmphasis(emphasis = emphasisLevels.medium) {
-                        Text(
-                            text = item.contentPreview,
-                            style = typography.body2,
-                            maxLines = 5
-                        )
+                        Spacer(modifier = LayoutHeight(8.dp))
+
+                        ProvideEmphasis(emphasis = emphasisLevels.medium) {
+                            Text(
+                                text = item.contentPreview,
+                                style = typography.body2,
+                                maxLines = 5
+                            )
+                        }
                     }
                 }
             }
