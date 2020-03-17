@@ -34,31 +34,31 @@ class FeedDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-                Column {
-                    TopAppBar(title = { Text(text = "Detail") })
+            Column {
+                TopAppBar(title = { Text(text = "Detail") })
 
-                    when (val state = observe(data = viewModel.state)) {
-                        is ViewState.Loading -> {
-                            CircularProgressIndicator()
-                        }
-                        is ViewState.Loaded -> {
-                            Text(text = state.data.title)
-                        }
-                        is ViewState.Error -> {
-                            Snackbar(
-                                text = { Text(text = state.error.localizedMessage ?: "Error") },
-                                action = {
-                                    TextButton(
-                                        contentColor = snackbarPrimaryColorFor(MaterialTheme.colors()),
-                                        onClick = { viewModel.retry() }
-                                    ) {
-                                        Text("Retry")
-                                    }
+                when (val state = observe(data = viewModel.state)) {
+                    is ViewState.Loading -> {
+                        CircularProgressIndicator()
+                    }
+                    is ViewState.Loaded -> {
+                        Text(text = state.data.title)
+                    }
+                    is ViewState.Error -> {
+                        Snackbar(
+                            text = { Text(text = state.error.localizedMessage ?: "Error") },
+                            action = {
+                                TextButton(
+                                    contentColor = snackbarPrimaryColorFor(MaterialTheme.colors()),
+                                    onClick = { viewModel.retry() }
+                                ) {
+                                    Text("Retry")
                                 }
-                            )
-                        }
+                            }
+                        )
                     }
                 }
+            }
         }
     }
 }
