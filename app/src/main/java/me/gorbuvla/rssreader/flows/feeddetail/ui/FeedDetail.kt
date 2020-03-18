@@ -13,7 +13,7 @@ import me.gorbuvla.rssreader.model.domain.FeedDetail
 import org.threeten.bp.ZonedDateTime
 
 /**
- * TODO add class description
+ * Composable view of feed detail.
  */
 @Composable
 fun FeedDetailContent(data: FeedDetail) {

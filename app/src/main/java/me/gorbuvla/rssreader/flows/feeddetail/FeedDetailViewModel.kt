@@ -21,6 +21,9 @@ class FeedDetailViewModel(
     val state: LiveData<ViewState<FeedDetail>>
         get() = viewState
 
+    val textToShare: String?
+        get() = (state.value as? ViewState.Loaded)?.data?.toString()
+
     init {
         loadDetail()
     }

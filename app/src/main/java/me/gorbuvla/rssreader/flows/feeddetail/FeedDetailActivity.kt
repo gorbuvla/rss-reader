@@ -1,12 +1,17 @@
 package me.gorbuvla.rssreader.flows.feeddetail
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Icon
 import androidx.ui.layout.Column
 import androidx.ui.material.*
+import androidx.ui.material.icons.Icons
+import androidx.ui.material.icons.filled.Close
+import androidx.ui.material.icons.filled.Favorite
 import me.gorbuvla.rssreader.base.ViewState
 import me.gorbuvla.rssreader.components.CircularProgress
 import me.gorbuvla.rssreader.components.RetrySnackbar
@@ -37,15 +42,39 @@ class FeedDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Column {
-                TopAppBar(title = { Text(text = "Detail") })
+            MaterialTheme {
+                Column {
+                    TopAppBar(title = { Text(text = "Detail")},
+                        navigationIcon = {
+                            IconButton(onClick = { finish() }) {
+                                Icon(Icons.Filled.Close)
+                            }
+                        },
+                        actions = {
+                            IconButton(onClick = { share() }) {
+                                Icon(Icons.Default.Favorite) // TODO: change later to share icon
+                            }
+                        })
 
-                when (val state = observe(data = viewModel.state)) {
-                    is ViewState.Loading -> CircularProgress()
-                    is ViewState.Loaded -> FeedDetailContent(data = state.data)
-                    is ViewState.Error -> RetrySnackbar(text = state.error.localizedMessage ?: "Error") { viewModel.retry() }
+
+                    when (val state = observe(data = viewModel.state)) {
+                        is ViewState.Loading -> CircularProgress()
+                        is ViewState.Loaded -> FeedDetailContent(data = state.data)
+                        is ViewState.Error -> RetrySnackbar(text = state.error.localizedMessage ?: "Error") { viewModel.retry() }
+                    }
                 }
             }
+        }
+    }
+
+    private fun share() {
+        viewModel.textToShare?.let { text ->
+            val intent = Intent()
+                .setAction(Intent.ACTION_SEND)
+                .putExtra(Intent.EXTRA_TEXT, text)
+                .setType("tex/plain")
+
+            startActivity(Intent.createChooser(intent, null))
         }
     }
 }
