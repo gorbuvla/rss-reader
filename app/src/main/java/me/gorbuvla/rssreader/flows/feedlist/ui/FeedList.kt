@@ -1,5 +1,6 @@
 package me.gorbuvla.rssreader.flows.feedlist.ui
 
+import android.text.Html
 import androidx.compose.Composable
 import androidx.ui.core.Text
 import androidx.ui.foundation.AdapterList
@@ -12,6 +13,7 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.material.ProvideEmphasis
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.material.surface.Card
+import androidx.ui.text.AnnotatedString
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import me.gorbuvla.rssreader.model.domain.FeedItem
@@ -48,6 +50,13 @@ fun FeedList(data: List<FeedItem>, onItemClick: (FeedItem) -> Unit) {
 private fun ListItem(item: FeedItem, onClick: () -> Unit) {
     val typography = MaterialTheme.typography()
     val emphasisLevels = EmphasisLevels()
+
+    val spanned = Html.fromHtml(item.contentPreview)
+
+
+    AnnotatedString(
+        spanned.toString()
+    )
     Card(shape = RoundedCornerShape(8.dp), elevation = 4.dp, modifier = LayoutWidth.Fill + LayoutPadding(8.dp)) {
         Ripple(bounded = true) {
             Clickable(onClick = onClick) {
@@ -64,7 +73,7 @@ private fun ListItem(item: FeedItem, onClick: () -> Unit) {
 
                         ProvideEmphasis(emphasis = emphasisLevels.medium) {
                             Text(
-                                text = item.contentPreview,
+                                text = AnnotatedString(Html.fromHtml(item.contentPreview).toString()),
                                 style = typography.body2,
                                 maxLines = 5
                             )
