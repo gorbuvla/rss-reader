@@ -2,8 +2,13 @@ package me.gorbuvla.rssreader.flows.feeddetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import kotlinx.coroutines.launch
-import me.gorbuvla.rssreader.base.*
+import androidx.lifecycle.ViewModel
+import me.gorbuvla.rssreader.base.ViewState
+import me.gorbuvla.rssreader.base.error
+import me.gorbuvla.rssreader.base.launch
+import me.gorbuvla.rssreader.base.loaded
+import me.gorbuvla.rssreader.base.loading
+import me.gorbuvla.rssreader.base.wrapResult
 import me.gorbuvla.rssreader.model.FeedRepository
 import me.gorbuvla.rssreader.model.domain.FeedDetail
 import me.gorbuvla.rssreader.util.Result
@@ -14,7 +19,7 @@ import me.gorbuvla.rssreader.util.Result
 class FeedDetailViewModel(
     private val id: Int,
     private val repository: FeedRepository
-): BaseViewModel() {
+): ViewModel() {
 
     private val viewState = MutableLiveData<ViewState<FeedDetail>>()
 
