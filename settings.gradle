@@ -1,2 +1,9 @@
-include ':app'
 rootProject.name = "RSS Reader"
+
+include ':app'
+
+include ':features:articles'
+include ':libraries:core'
+include ':libraries:database'
+include ':libraries:rss'
+include ':libraries:ui'

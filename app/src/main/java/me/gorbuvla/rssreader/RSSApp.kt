@@ -2,12 +2,12 @@ package me.gorbuvla.rssreader
 
 import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
-import me.gorbuvla.rssreader.di.apiModule
-import me.gorbuvla.rssreader.di.repositoryModule
-import me.gorbuvla.rssreader.di.viewModelModule
+import me.gorbuvla.database.di.databaseModule
+import me.gorbuvla.rss.rssModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
+
 
 class RSSApp : Application() {
 
@@ -18,7 +18,7 @@ class RSSApp : Application() {
 
         startKoin {
             androidContext(this@RSSApp)
-            modules(viewModelModule, repositoryModule, apiModule)
+            modules(rssModule, databaseModule)
         }
     }
 }

@@ -4,6 +4,14 @@
     <bytecodeTargetLevel>
       <module name="app" target="1.8" />
       <module name="RSS_Reader.app" target="1.8" />
+      <module name="RSS_Reader.articles" target="1.8" />
+      <module name="RSS_Reader.database" target="1.8" />
+      <module name="RSS_Reader.features.articles" target="1.8" />
+      <module name="RSS_Reader.features.feeds" target="1.8" />
+      <module name="RSS_Reader.libraries.core" target="1.8" />
+      <module name="RSS_Reader.libraries.database" target="1.8" />
+      <module name="RSS_Reader.libraries.rss" target="1.8" />
+      <module name="RSS_Reader.libraries.ui" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
