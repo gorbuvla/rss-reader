@@ -30,10 +30,10 @@ class ArticleListActivity : AppCompatActivity() {
                 Column {
                     TopAppBar(title = { Text(text = "RSS reader") })
 
-                    when (val state = observe(data = viewModel.state)) {
-                        is ViewState.Loading -> Text(text = "Loading")
-                        is ViewState.Loaded -> ArticleList(data = state.data, onItemClick = ::openDetail)
-                        is ViewState.Error -> RetrySnackbar(text = state.error.localizedMessage ?: "Error") { viewModel.retry() }
+                    when (val articles = observe(data = viewModel.articles)) {
+                        is List<Article> -> {
+                            ArticleList(data = articles, onItemClick = ::openDetail)
+                        }
                     }
                 }
             }

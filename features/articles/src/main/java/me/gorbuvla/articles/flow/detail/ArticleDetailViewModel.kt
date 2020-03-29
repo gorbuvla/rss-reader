@@ -34,8 +34,8 @@ class ArticleDetailViewModel(
     init {
         viewState.loading()
 
-        repository.observeArticle(id)
-            .into(viewState)
-            .launchIn(viewModelScope)
+//        repository.observeArticle(id)
+//            .into(viewState)
+//            .launchIn(viewModelScope)
     }
 }

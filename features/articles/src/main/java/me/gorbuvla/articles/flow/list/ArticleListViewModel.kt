@@ -1,46 +1,39 @@
 package me.gorbuvla.articles.flow.list
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.flow.*
 import me.gorbuvla.articles.model.ArticleRepository
 import me.gorbuvla.core.domain.Article
 import me.gorbuvla.core.into
 import me.gorbuvla.ui.util.*
+import timber.log.Timber
 
 /**
  * ViewModel for screen with feed items.
  */
 class ArticleListViewModel(private val repository: ArticleRepository) : ViewModel() {
 
-    private val viewState = MutableLiveData<ViewState<List<Article>>>()
+    private val loadingState = MutableLiveData<ViewState<Unit>>()
 
-    val state: LiveData<ViewState<List<Article>>>
-        get() = viewState
+    val loading: LiveData<Boolean>
+        get() = loadingState.map { it is ViewState.Loading }
 
-    init {
-        viewState.loading()
-
-        loadLatest()
-
-        repository.observeArticles()
-            .into(viewState)
-            .launchIn(viewModelScope)
-
-
-            //.onEach { viewState.loaded(it) }
-//            .catch { viewState.error(it) }
-//            .launchIn(viewModelScope)
+    val state = MediatorLiveData<List<Article>>().apply {
+        value = emptyList()
+        addSource(repository.observeArticles().asLiveData()) {
+            value = it
+        }
     }
 
-    fun retry() {
-        viewState.reloadingWithPrevious()
+    val articles: LiveData<List<Article>>
+        get() = state
+
+    init {
         loadLatest()
     }
 
     private fun loadLatest() {
+        loadingState.loading()
         launch { repository.fetchArticles() }
     }
 }
