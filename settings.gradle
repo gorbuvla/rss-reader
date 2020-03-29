@@ -3,6 +3,7 @@ rootProject.name = "RSS Reader"
 include ':app'
 
 include ':features:articles'
+include ':features:feeds'
 include ':libraries:core'
 include ':libraries:database'
 include ':libraries:rss'

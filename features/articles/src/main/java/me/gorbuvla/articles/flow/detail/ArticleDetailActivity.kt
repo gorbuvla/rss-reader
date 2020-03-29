@@ -33,7 +33,7 @@ class ArticleDetailActivity : AppCompatActivity() {
         fun arguments(id: Long): Bundle = bundleOf(ID_KEY to id)
 
         private fun vmParams(arguments: Bundle): DefinitionParameters {
-            return parametersOf(arguments.getInt(ID_KEY))
+            return parametersOf(arguments.getLong(ID_KEY))
         }
     }
 

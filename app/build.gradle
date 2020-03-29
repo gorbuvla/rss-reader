@@ -42,6 +42,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(":features:articles")
+    implementation project(":features:feeds")
 
     implementation project(":libraries:database")
     implementation project(":libraries:rss")

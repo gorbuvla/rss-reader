@@ -6,6 +6,7 @@ import me.gorbuvla.core.database.DatabaseInteractor
 import me.gorbuvla.core.domain.Article
 import me.gorbuvla.database.entities.ArticleDao
 import me.gorbuvla.database.entities.DbArticle
+import timber.log.Timber
 
 /**
  * Shared Access point for all database operations.
@@ -20,13 +21,19 @@ class DbInteractorImpl(private val dao: ArticleDao): DbInteractor {
     }
 
     override fun observeArticles(): Flow<List<Article>> {
-        return dao.feeds().map { list ->
-            list.map { it.toArticle() }
+        return dao.articles().map { list ->
+            list.map {
+                Timber.i("ARTICLE ${it.id}")
+                it.toArticle() }
         }
     }
 
     override fun observeArticle(id: Long): Flow<Article> {
-        return dao.feed(id).map { it.toArticle() }
+        return dao.article(id).map {
+            Timber.i("ARTICLE ID: ${it.firstOrNull()?.id} ${id}")
+            it.first().toArticle()
+
+        }
     }
 
     private fun Article.toDbArticle(): DbArticle {

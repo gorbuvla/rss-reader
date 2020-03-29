@@ -8,7 +8,7 @@ import org.threeten.bp.ZonedDateTime
 /**
  * Db entity description for [Article]
  */
-@Entity(tableName = "feed")
+@Entity(tableName = "article")
 data class DbArticle(
     @PrimaryKey(autoGenerate = true) val id: Long,
     val title: String,
@@ -29,14 +29,14 @@ data class DbArticle(
 interface ArticleDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(vararg feeds: DbArticle)
+    suspend fun insert(vararg articles: DbArticle)
 
-    @Query("SELECT * FROM feed")
-    fun feeds(): Flow<List<DbArticle>>
+    @Query("SELECT * FROM article")
+    fun articles(): Flow<List<DbArticle>>
 
-    @Query("SELECT * FROM feed WHERE id = :id LIMIT(1)")
-    fun feed(id: Long): Flow<DbArticle>
+    @Query("SELECT * FROM article WHERE id = :id LIMIT(1)")
+    fun article(id: Long): Flow<List<DbArticle>>
 
-    @Query("DELETE FROM feed")
+    @Query("DELETE FROM article")
     suspend fun clear()
 }

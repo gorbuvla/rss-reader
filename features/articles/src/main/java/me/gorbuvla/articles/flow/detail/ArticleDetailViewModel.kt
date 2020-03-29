@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import me.gorbuvla.articles.model.ArticleRepository
 import me.gorbuvla.core.domain.Article
+import me.gorbuvla.core.into
 import me.gorbuvla.ui.util.ViewState
 import me.gorbuvla.ui.util.error
 import me.gorbuvla.ui.util.loaded
@@ -34,8 +35,7 @@ class ArticleDetailViewModel(
         viewState.loading()
 
         repository.observeArticle(id)
-            .onEach { viewState.loaded(it) }
-            .catch { viewState.error(it) }
+            .into(viewState)
             .launchIn(viewModelScope)
     }
 }

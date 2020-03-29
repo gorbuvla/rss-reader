@@ -4,11 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import me.gorbuvla.articles.model.ArticleRepository
 import me.gorbuvla.core.domain.Article
+import me.gorbuvla.core.into
 import me.gorbuvla.ui.util.*
 
 /**
@@ -27,9 +26,13 @@ class ArticleListViewModel(private val repository: ArticleRepository) : ViewMode
         loadLatest()
 
         repository.observeArticles()
-            .onEach { viewState.loaded(it) }
-            .catch { viewState.error(it) }
+            .into(viewState)
             .launchIn(viewModelScope)
+
+
+            //.onEach { viewState.loaded(it) }
+//            .catch { viewState.error(it) }
+//            .launchIn(viewModelScope)
     }
 
     fun retry() {
