@@ -52,7 +52,7 @@ fun ArticleDetailContent(data: Article) {
 @Preview
 @Composable
 private fun FeedDetailPreview() {
-    val data = Article(1, "Blog title", "Blog conent", ZonedDateTime.now())
+    val data = Article("asfafsa", "Blog title", "Blog conent", ZonedDateTime.now())
     MaterialTheme {
         ArticleDetailContent(data = data)
     }

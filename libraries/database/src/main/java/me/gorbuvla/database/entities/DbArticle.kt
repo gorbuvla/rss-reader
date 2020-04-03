@@ -10,7 +10,7 @@ import org.threeten.bp.ZonedDateTime
  */
 @Entity(tableName = "article")
 data class DbArticle(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey val id: String,
     val title: String,
     val content: String
 ) {
@@ -35,7 +35,7 @@ interface ArticleDao {
     fun articles(): Flow<List<DbArticle>>
 
     @Query("SELECT * FROM article WHERE id = :id LIMIT(1)")
-    fun article(id: Long): Flow<List<DbArticle>>
+    fun article(id: String): Flow<List<DbArticle>>
 
     @Query("DELETE FROM article")
     suspend fun clear()

@@ -10,16 +10,13 @@ import kotlinx.coroutines.flow.onEach
 import me.gorbuvla.articles.model.ArticleRepository
 import me.gorbuvla.core.domain.Article
 import me.gorbuvla.core.into
-import me.gorbuvla.ui.util.ViewState
-import me.gorbuvla.ui.util.error
-import me.gorbuvla.ui.util.loaded
-import me.gorbuvla.ui.util.loading
+import me.gorbuvla.ui.util.*
 
 /**
  * ViewModel for screen with feed detail.
  */
 class ArticleDetailViewModel(
-    id: Long,
+    id: String,
     repository: ArticleRepository
 ): ViewModel() {
 
@@ -34,8 +31,9 @@ class ArticleDetailViewModel(
     init {
         viewState.loading()
 
-//        repository.observeArticle(id)
-//            .into(viewState)
-//            .launchIn(viewModelScope)
+        launch {
+            repository.observeArticle(id)
+                .into(viewState)
+        }
     }
 }
