@@ -31,7 +31,7 @@ import org.threeten.bp.ZonedDateTime
 fun ArticleList(data: List<Article>, onItemClick: (Article) -> Unit) {
     VerticalScroller {
         Column {
-            data.forEach {  item ->
+            data.forEach { item ->
                 ListItem(item = item, onClick = { onItemClick(item) })
             }
 

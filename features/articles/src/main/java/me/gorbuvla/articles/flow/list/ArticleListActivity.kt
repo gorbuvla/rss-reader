@@ -5,8 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Icon
 import androidx.ui.layout.*
 import androidx.ui.material.*
+import androidx.ui.material.icons.Icons
+import androidx.ui.material.icons.filled.Favorite
 import me.gorbuvla.articles.flow.detail.ArticleDetailActivity
 import me.gorbuvla.articles.flow.list.ui.ArticleList
 import me.gorbuvla.core.domain.Article
@@ -28,7 +31,13 @@ class ArticleListActivity : AppCompatActivity() {
         setContent {
             MaterialTheme {
                 Column {
-                    TopAppBar(title = { Text(text = "RSS reader") })
+                    TopAppBar(
+                        title = { Text(text = "RSS reader") },
+                        actions = {
+                            IconButton(onClick = { openFeeds() }) {
+                                Icon(Icons.Default.Favorite) // TODO: change later to feed icon?
+                            }
+                        })
 
                     when (val articles = observe(data = viewModel.articles)) {
                         is List<Article> -> {
@@ -44,6 +53,15 @@ class ArticleListActivity : AppCompatActivity() {
         startActivity(
             Intent(this, ArticleDetailActivity::class.java)
                 .putExtras(ArticleDetailActivity.arguments(item.id))
+        )
+    }
+
+    /**
+     * TODO: ok for now, deal with cross feature navigation in future
+     */
+    private fun openFeeds() {
+        startActivity(
+            Intent(this, Class.forName("me.gorbuvla.feeds.flows.list.FeedsActivity"))
         )
     }
 }

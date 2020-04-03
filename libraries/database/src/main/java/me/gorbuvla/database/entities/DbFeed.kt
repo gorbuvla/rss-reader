@@ -24,6 +24,7 @@ data class DbFeed(
     }
 }
 
+@Dao
 interface FeedDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
