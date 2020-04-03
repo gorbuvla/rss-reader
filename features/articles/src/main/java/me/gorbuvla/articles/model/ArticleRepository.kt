@@ -33,10 +33,10 @@ internal class ArticleRepositoryImpl(
     }
 
     override fun observeArticles(): Flow<List<Article>> {
-        return db.observeArticles()
+        return db.articles()
     }
 
     override fun observeArticle(id: Long): Flow<Article> {
-        return db.observeArticle(id)
+        return db.article(id)
     }
 }
