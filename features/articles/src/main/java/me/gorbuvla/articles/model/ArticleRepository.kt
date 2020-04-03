@@ -2,11 +2,9 @@ package me.gorbuvla.articles.model
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.launchIn
 import me.gorbuvla.core.database.DatabaseInteractor
 import me.gorbuvla.core.domain.Article
 import me.gorbuvla.core.rss.RssInteractor
-import java.net.URL
 
 /**
  * Repository to manage [Article].
