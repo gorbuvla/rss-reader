@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.gorbuvla.rssreader">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".RSSApp"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".flows.feedlist.FeedListActivity"
+            android:name="me.gorbuvla.articles.flow.list.ArticleListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -20,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".flows.feeddetail.FeedDetailActivity"
+            android:name="me.gorbuvla.articles.flow.detail.ArticleDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
