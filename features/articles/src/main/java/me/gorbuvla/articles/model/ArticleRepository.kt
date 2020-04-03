@@ -1,6 +1,8 @@
 package me.gorbuvla.articles.model
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.launchIn
 import me.gorbuvla.core.database.DatabaseInteractor
 import me.gorbuvla.core.domain.Article
 import me.gorbuvla.core.rss.RssInteractor
@@ -23,13 +25,9 @@ internal class ArticleRepositoryImpl(
     private val db: DatabaseInteractor
 ): ArticleRepository {
 
-    private val feeds = listOf(
-        URL("http://android-developers.blogspot.com/atom.xml"),
-        URL("https://swift.org/atom.xml?format=xml")
-    )
-
     override suspend fun fetchArticles() {
-        db.store(rss.fetch(feeds))
+        val feedUrls = db.feeds().first().map { it.url }
+        db.store(rss.fetch(feedUrls))
     }
 
     override fun observeArticles(): Flow<List<Article>> {
