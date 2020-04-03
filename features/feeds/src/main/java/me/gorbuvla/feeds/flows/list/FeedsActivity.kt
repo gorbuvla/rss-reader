@@ -2,19 +2,13 @@ package me.gorbuvla.feeds.flows.list
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
-import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.Icon
-import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.*
 import androidx.ui.material.*
 import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Close
-import androidx.ui.material.ripple.Ripple
-import androidx.ui.unit.dp
-import me.gorbuvla.core.domain.Feed
 import me.gorbuvla.feeds.flows.list.ui.FeedList
 import me.gorbuvla.ui.util.ViewState
 import me.gorbuvla.ui.util.observe
