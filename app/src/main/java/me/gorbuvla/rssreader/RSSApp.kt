@@ -4,6 +4,7 @@ import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
 import me.gorbuvla.articles.di.articlesModule
 import me.gorbuvla.database.di.databaseModule
+import me.gorbuvla.feeds.di.feedsModule
 import me.gorbuvla.rss.rssModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -18,7 +19,7 @@ class RSSApp : Application() {
 
         startKoin {
             androidContext(this@RSSApp)
-            modules(articlesModule, rssModule, databaseModule)
+            modules(articlesModule, feedsModule, rssModule, databaseModule)
         }
     }
 }
