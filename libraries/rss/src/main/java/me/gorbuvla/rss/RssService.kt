@@ -15,7 +15,7 @@ import timber.log.Timber
 import java.net.URL
 
 /**
- * TODO add class description
+ * Service for loading remote rss data.
  */
 class RssService(private val fetcher: FeedFetcher) : RssInteractor {
 
@@ -23,8 +23,6 @@ class RssService(private val fetcher: FeedFetcher) : RssInteractor {
         return withContext(Dispatchers.IO) {
             val result = urls.flatMap { url ->
                 val entries = fetcher.retrieveFeed(url).entries
-
-                Timber.i("RESULT: ${entries.first()}")
 
                 entries.map { (it as SyndEntry).toArticle() }
             }

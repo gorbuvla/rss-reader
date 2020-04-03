@@ -9,7 +9,7 @@ import androidx.ui.material.MaterialTheme
 import java.net.URL
 
 /**
- * TODO add class description
+ * Activity for screen with list of current feeds.
  */
 class FeedsActivity : AppCompatActivity() {
 
@@ -23,7 +23,6 @@ class FeedsActivity : AppCompatActivity() {
         setContent { 
             MaterialTheme {
                 Column {
-                    
                     feeds.forEach {
                         Text(text = it)
                     }
