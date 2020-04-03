@@ -2,17 +2,6 @@ apply plugin: 'com.android.library'
 apply from: '../../gradle/common.gradle'
 apply plugin: 'kotlin-kapt'
 
-android {
-
-    defaultConfig {
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
-            }
-        }
-    }
-}
-
 dependencies {
     implementation project(":libraries:core")
 
