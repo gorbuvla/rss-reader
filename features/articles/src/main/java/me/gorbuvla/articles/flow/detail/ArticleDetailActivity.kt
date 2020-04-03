@@ -30,10 +30,10 @@ class ArticleDetailActivity : AppCompatActivity() {
 
         private const val ID_KEY = "id_key"
 
-        fun arguments(id: Long): Bundle = bundleOf(ID_KEY to id)
+        fun arguments(id: String): Bundle = bundleOf(ID_KEY to id)
 
         private fun vmParams(arguments: Bundle): DefinitionParameters {
-            return parametersOf(arguments.getLong(ID_KEY))
+            return parametersOf(arguments.getString(ID_KEY))
         }
     }
 
