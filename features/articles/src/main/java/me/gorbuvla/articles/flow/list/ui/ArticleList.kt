@@ -35,7 +35,7 @@ fun ArticleList(data: List<Article>, onItemClick: (Article) -> Unit) {
                 ListItem(item = item, onClick = { onItemClick(item) })
             }
 
-            Spacer(modifier = LayoutHeight(16.dp))
+            Spacer(modifier = Modifier.preferredHeight(8.dp))
         }
     }
 }
@@ -51,10 +51,10 @@ private fun ListItem(item: Article, onClick: () -> Unit) {
     val typography = MaterialTheme.typography
     val emphasisLevels = MaterialTheme.emphasisLevels
 
-    Card(shape = RoundedCornerShape(8.dp), elevation = 4.dp, modifier = Modifier.fillMaxWidth() + Modifier.ripple(bounded = true) + Modifier.padding(8.dp)) {
-        Clickable(onClick = onClick) {
+    Card(shape = RoundedCornerShape(8.dp), elevation = 4.dp, modifier = Modifier.fillMaxWidth() + Modifier.padding(8.dp)) {
+        Clickable(onClick = onClick, modifier = Modifier.ripple(bounded = true)) {
             Column {
-                Column(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
+                Column(modifier = Modifier.fillMaxWidth() + Modifier.padding(16.dp)) {
                     ProvideEmphasis(emphasis = emphasisLevels.high) {
                         Text(
                             text = item.title,
@@ -62,7 +62,7 @@ private fun ListItem(item: Article, onClick: () -> Unit) {
                         )
                     }
 
-                    Spacer(modifier = LayoutHeight(8.dp))
+                    Spacer(modifier = Modifier.preferredHeight(8.dp))
 
                     ProvideEmphasis(emphasis = emphasisLevels.medium) {
                         Text(
