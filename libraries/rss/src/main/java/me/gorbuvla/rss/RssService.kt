@@ -32,7 +32,7 @@ class RssService(private val fetcher: FeedFetcher) : RssInteractor {
 
 private fun SyndEntry.toArticle(): Article {
     return Article(
-        id = uri,
+        id = 0,
         title = title,
         content = (contents.first() as SyndContent).value,
         createdAt = ZonedDateTime.ofInstant(Instant.ofEpochMilli(updatedDate.time), ZoneId.systemDefault())

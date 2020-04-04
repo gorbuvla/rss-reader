@@ -39,9 +39,9 @@ class ArticleListActivity : AppCompatActivity() {
                             }
                         })
 
-                    when (val articles = observe(data = viewModel.articles)) {
-                        is List<Article> -> {
-                            ArticleList(data = articles, onItemClick = ::openDetail)
+                    when (val state = observe(data = viewModel.articles)) {
+                        is ViewState.Loaded -> {
+                            ArticleList(data = state.data, onItemClick = ::openDetail)
                         }
                     }
                 }

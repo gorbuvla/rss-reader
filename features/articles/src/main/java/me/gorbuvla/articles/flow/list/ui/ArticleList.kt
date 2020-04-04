@@ -109,7 +109,7 @@ private fun ListItem(item: Article, onClick: () -> Unit) {
 @Preview
 @Composable
 private fun FeedListPreview() {
-    val feed = (0..2).map { Article("$it", "Blog $it", "Blog $it preview", ZonedDateTime.now()) }
+    val feed = (0..2).map { Article(it, "Blog $it", "Blog $it preview", ZonedDateTime.now()) }
     MaterialTheme {
         ArticleList(data = feed, onItemClick = {})
     }

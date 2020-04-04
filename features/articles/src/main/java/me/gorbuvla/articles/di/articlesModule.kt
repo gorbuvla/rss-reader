@@ -13,7 +13,7 @@ val articlesModule = module {
         ArticleListViewModel(repository = get())
     }
 
-    viewModel { (id: String) ->
+    viewModel { (id: Int) ->
         ArticleDetailViewModel(id = id, repository = get())
     }
 

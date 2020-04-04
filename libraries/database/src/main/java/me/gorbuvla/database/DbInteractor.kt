@@ -14,15 +14,13 @@ import me.gorbuvla.database.entities.FeedDao
 /**
  * Shared Access point for all database operations.
  */
-typealias DbInteractor = DatabaseInteractor
-
 class DbInteractorImpl(
     private val articleDao: ArticleDao,
     private val feedDao: FeedDao
-): DbInteractor {
+): DatabaseInteractor {
 
     override suspend fun store(data: List<Article>) {
-        articleDao.insert(*data.map { it.toDbArticle() }.toTypedArray())
+        articleDao.replace(*data.map { it.toDbArticle() }.toTypedArray())
     }
 
     override fun articles(): Flow<List<Article>> {
@@ -31,7 +29,7 @@ class DbInteractorImpl(
             .map { list -> list.map { it.toArticle() } }
     }
 
-    override fun article(id: String): Flow<Article> {
+    override fun article(id: Int): Flow<Article> {
         return articleDao.article(id)
             .distinctUntilChanged()
             .map { it.first().toArticle() }
@@ -52,7 +50,7 @@ class DbInteractorImpl(
 
     private fun Article.toDbArticle(): DbArticle {
         return DbArticle(
-            id = id,
+            id = 0,
             title = title,
             content = content
         )
