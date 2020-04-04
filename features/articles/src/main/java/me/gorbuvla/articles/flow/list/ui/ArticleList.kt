@@ -2,17 +2,17 @@ package me.gorbuvla.articles.flow.list.ui
 
 import android.text.Html
 import androidx.compose.Composable
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.foundation.AdapterList
 import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.*
-import androidx.ui.material.EmphasisLevels
+import androidx.ui.material.Card
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.ProvideEmphasis
-import androidx.ui.material.ripple.Ripple
-import androidx.ui.material.surface.Card
+import androidx.ui.material.ripple.ripple
 import androidx.ui.text.AnnotatedString
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
@@ -48,30 +48,28 @@ fun ArticleList(data: List<Article>, onItemClick: (Article) -> Unit) {
  */
 @Composable
 private fun ListItem(item: Article, onClick: () -> Unit) {
-    val typography = MaterialTheme.typography()
-    val emphasisLevels = EmphasisLevels()
+    val typography = MaterialTheme.typography
+    val emphasisLevels = MaterialTheme.emphasisLevels
 
-    Card(shape = RoundedCornerShape(8.dp), elevation = 4.dp, modifier = LayoutWidth.Fill + LayoutPadding(8.dp)) {
-        Ripple(bounded = true) {
-            Clickable(onClick = onClick) {
-                Column {
-                    Column(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
-                        ProvideEmphasis(emphasis = emphasisLevels.high) {
-                            Text(
-                                text = item.title,
-                                style = typography.subtitle1
-                            )
-                        }
+    Card(shape = RoundedCornerShape(8.dp), elevation = 4.dp, modifier = Modifier.fillMaxWidth() + Modifier.ripple(bounded = true) + Modifier.padding(8.dp)) {
+        Clickable(onClick = onClick) {
+            Column {
+                Column(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
+                    ProvideEmphasis(emphasis = emphasisLevels.high) {
+                        Text(
+                            text = item.title,
+                            style = typography.subtitle1
+                        )
+                    }
 
-                        Spacer(modifier = LayoutHeight(8.dp))
+                    Spacer(modifier = LayoutHeight(8.dp))
 
-                        ProvideEmphasis(emphasis = emphasisLevels.medium) {
-                            Text(
-                                text = AnnotatedString(Html.fromHtml(item.content).toString()),
-                                style = typography.body2,
-                                maxLines = 5
-                            )
-                        }
+                    ProvideEmphasis(emphasis = emphasisLevels.medium) {
+                        Text(
+                            text = AnnotatedString(Html.fromHtml(item.content).toString()),
+                            style = typography.body2,
+                            maxLines = 5
+                        )
                     }
                 }
             }

@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.ui.core.Text
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Icon
+import androidx.ui.foundation.Text
 import androidx.ui.layout.Column
 import androidx.ui.material.*
 import androidx.ui.material.icons.Icons
