@@ -13,7 +13,7 @@ interface DatabaseInteractor {
 
     fun articles(): Flow<List<Article>>
 
-    fun article(id: String): Flow<Article>
+    fun article(id: Int): Flow<Article>
 
     suspend fun store(feed: Feed)
 

@@ -16,7 +16,7 @@ import me.gorbuvla.ui.util.*
  * ViewModel for screen with feed detail.
  */
 class ArticleDetailViewModel(
-    id: String,
+    id: Int,
     repository: ArticleRepository
 ): ViewModel() {
 
