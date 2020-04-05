@@ -23,7 +23,7 @@ import java.net.URL
 
 
 @Composable
-fun AddFeedPrompt(visible: MutableState<Boolean>, onSubmit: (String, String) -> Unit) {
+fun AddFeedPrompt(presented: MutableState<Boolean>, onSubmit: (String, String) -> Unit) {
     val nameField = state { if (BuildConfig.DEBUG) "Kotlin Official Blog" else ""  }
     val nameError = state { "" }
     val linkField = state { if (BuildConfig.DEBUG) "http://feeds.feedburner.com/kotlin" else "" }
@@ -43,21 +43,21 @@ fun AddFeedPrompt(visible: MutableState<Boolean>, onSubmit: (String, String) -> 
 
         if (nameValidation == null && linkValidation == null) {
             onSubmit(nameField.value, linkField.value)
-            visible.value = false
+            presented.value = false
         }
     }
 
-    if (visible.value) {
+    if (presented.value) {
         AlertDialog(
             title = { Text(text = "Add Feed") },
-            onCloseRequest = { visible.value = false },
+            onCloseRequest = { presented.value = false },
             confirmButton = {
                 Button(onClick = { validateAndSubmit() }) {
                     Text(text = "Add")
                 }
             },
             dismissButton = {
-                Button(onClick = { visible.value = false }, backgroundColor = MaterialTheme.colors.error) {
+                Button(onClick = { presented.value = false }, backgroundColor = MaterialTheme.colors.error) {
                     Text(text = "Cancel")
                 }
             },

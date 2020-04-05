@@ -2,6 +2,7 @@ package me.gorbuvla.feeds.flows.list.ui
 
 import androidx.compose.Composable
 import androidx.ui.core.Modifier
+import androidx.ui.foundation.AdapterList
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
@@ -18,7 +19,7 @@ fun FeedList(data: List<Feed>, onClick: (Feed) -> Unit) {
     VerticalScroller {
         Column {
             data.forEach { feed ->
-                FeedItem(item = feed, onLongClick = { onClick(feed) })
+                FeedItem(item = feed, onClick = { onClick(feed) })
             }
         }
 
@@ -27,11 +28,11 @@ fun FeedList(data: List<Feed>, onClick: (Feed) -> Unit) {
 }
 
 @Composable
-private fun FeedItem(item: Feed, onLongClick: () -> Unit) {
+private fun FeedItem(item: Feed, onClick: () -> Unit) {
     val typography = MaterialTheme.typography
     val emphasisLevels = MaterialTheme.emphasisLevels
 
-    Clickable(modifier = Modifier.ripple(bounded = true), onClick = onLongClick) {
+    Clickable(modifier = Modifier.ripple(bounded = true), onClick = onClick) {
         Column {
             Column(modifier = Modifier.fillMaxWidth() + Modifier.padding(16.dp)) {
                 ProvideEmphasis(emphasis = emphasisLevels.high) {
