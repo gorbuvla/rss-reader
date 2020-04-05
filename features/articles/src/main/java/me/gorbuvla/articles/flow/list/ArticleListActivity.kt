@@ -12,7 +12,7 @@ import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Favorite
 import me.gorbuvla.articles.flow.detail.ArticleDetailActivity
 import me.gorbuvla.articles.flow.list.ui.ArticleList
-import me.gorbuvla.core.domain.Article
+import me.gorbuvla.core.domain.ArticleSnapshot
 import me.gorbuvla.ui.util.ViewState
 import me.gorbuvla.ui.util.observe
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -47,7 +47,7 @@ class ArticleListActivity : AppCompatActivity() {
         }
     }
 
-    private fun openDetail(item: Article) {
+    private fun openDetail(item: ArticleSnapshot) {
         startActivity(
             Intent(this, ArticleDetailActivity::class.java)
                 .putExtras(ArticleDetailActivity.arguments(item.id))

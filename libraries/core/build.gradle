@@ -8,6 +8,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$corektx_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
 
+    implementation "org.koin:koin-android:$koin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
 
     implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"

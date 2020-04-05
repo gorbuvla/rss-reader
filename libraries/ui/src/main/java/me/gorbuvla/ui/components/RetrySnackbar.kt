@@ -17,7 +17,6 @@ import androidx.ui.material.snackbarPrimaryColorFor
  */
 @Composable
 fun RetrySnackbar(text: String, action: () -> Unit = {}) {
-    Text(text = "")
     Box(modifier = Modifier.fillMaxWidth() + Modifier.fillMaxHeight()) {
         Snackbar(
             text = { Text(text = text) },
