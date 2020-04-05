@@ -1,6 +1,5 @@
 package me.gorbuvla.feeds.flows.list.ui
 
-import android.os.Build
 import androidx.compose.Composable
 import androidx.compose.MutableState
 import androidx.compose.state
