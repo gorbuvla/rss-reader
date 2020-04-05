@@ -1,5 +1,6 @@
 package me.gorbuvla.feeds.flows.list.ui
 
+import android.os.Build
 import androidx.compose.Composable
 import androidx.compose.MutableState
 import androidx.compose.state
@@ -17,15 +18,16 @@ import androidx.ui.material.Button
 import androidx.ui.material.MaterialTheme
 import androidx.ui.text.TextStyle
 import androidx.ui.unit.dp
+import me.gorbuvla.feeds.BuildConfig
 import java.lang.Exception
 import java.net.URL
 
 
 @Composable
 fun AddFeedPrompt(visible: MutableState<Boolean>, onSubmit: (String, String) -> Unit) {
-    val nameField = state { "" }
+    val nameField = state { if (BuildConfig.DEBUG) "Kotlin Official Blog" else ""  }
     val nameError = state { "" }
-    val linkField = state { "" }
+    val linkField = state { if (BuildConfig.DEBUG) "http://feeds.feedburner.com/kotlin" else "" }
     val linkError = state { "" }
 
     fun validateAndSubmit() {
@@ -42,6 +44,7 @@ fun AddFeedPrompt(visible: MutableState<Boolean>, onSubmit: (String, String) -> 
 
         if (nameValidation == null && linkValidation == null) {
             onSubmit(nameField.value, linkField.value)
+            visible.value = false
         }
     }
 

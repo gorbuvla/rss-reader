@@ -7,6 +7,7 @@ import androidx.lifecycle.map
 import me.gorbuvla.core.domain.Feed
 import me.gorbuvla.feeds.model.FeedRepository
 import me.gorbuvla.ui.util.ViewState
+import me.gorbuvla.ui.util.launch
 import java.net.URL
 
 /**
@@ -18,6 +19,6 @@ class FeedsViewModel(private val repository: FeedRepository) : ViewModel() {
         get() = repository.feeds().asLiveData().map { ViewState.Loaded(it) }
 
     fun addNew(name: String, link: URL) {
-
+        launch { repository.add(name, link) }
     }
 }
