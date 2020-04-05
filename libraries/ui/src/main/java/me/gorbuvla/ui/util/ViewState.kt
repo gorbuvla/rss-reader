@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
  */
 sealed class ViewState<out T> {
     object Loading : ViewState<Nothing>()
+    object Empty : ViewState<Nothing>()
     data class Error(val error: Throwable) : ViewState<Nothing>()
     data class Loaded<out T>(val data: T) : ViewState<T>()
     data class Reloading<out T>(val previousData: T?) : ViewState<T>()
@@ -18,6 +19,10 @@ sealed class ViewState<out T> {
 
 fun <T> MutableLiveData<ViewState<T>>.loading() {
     value = ViewState.Loading
+}
+
+fun <T> MutableLiveData<ViewState<T>>.empty() {
+    value = ViewState.Empty
 }
 
 fun <T> MutableLiveData<ViewState<T>>.reloadingWithPrevious() {

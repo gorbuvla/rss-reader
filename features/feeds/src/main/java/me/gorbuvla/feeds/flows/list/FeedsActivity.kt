@@ -13,8 +13,10 @@ import androidx.ui.material.TopAppBar
 import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Close
 import androidx.ui.material.icons.filled.Favorite
+import me.gorbuvla.core.domain.Feed
 import me.gorbuvla.feeds.flows.list.ui.AddFeedPrompt
 import me.gorbuvla.feeds.flows.list.ui.FeedList
+import me.gorbuvla.feeds.flows.list.ui.RemoveFeedPrompt
 import me.gorbuvla.ui.util.ViewState
 import me.gorbuvla.ui.util.observe
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -31,7 +33,9 @@ class FeedsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent { 
             MaterialTheme {
-                val showDialog = state { false }
+                val addPresented = state { false }
+                val removePresented = state { false }
+                val remove = state<Feed?> { null }
 
                 Column {
                     TopAppBar(
@@ -42,19 +46,27 @@ class FeedsActivity : AppCompatActivity() {
                             }
                         },
                         actions = {
-                            IconButton(onClick = { showDialog.value = true }) {
+                            IconButton(onClick = { addPresented.value = true }) {
                                 Icon(Icons.Default.Favorite) // TODO: change later to add icon?
                             }
                         })
 
                     when (val state = observe(data = viewModel.feeds)) {
-                        is ViewState.Loaded -> FeedList(data = state.data) {
-                            // TODO: show delete prompt
+                        is ViewState.Loaded -> FeedList(data = state.data) { feed ->
+                            remove.value = feed
+                            removePresented.value = true // 😑 🙄 states cannot be mapped
                         }
+                        is ViewState.Empty -> Text(text = "You don't have any feeds")
                     }
 
-                    if (showDialog.value) {
-                        AddFeedPrompt(visible = showDialog, onSubmit = { name, link -> viewModel.addNew(name, URL(link)) })
+                    if (addPresented.value) {
+                        AddFeedPrompt(presented = addPresented, onSubmit = { name, link -> viewModel.addNew(name, URL(link)) })
+                    }
+
+                    if (removePresented.value && remove.value != null) {
+                        RemoveFeedPrompt(presented = removePresented, feed = remove.value!!) {
+                            viewModel.remove(remove.value!!)
+                        }
                     }
                 }
             }

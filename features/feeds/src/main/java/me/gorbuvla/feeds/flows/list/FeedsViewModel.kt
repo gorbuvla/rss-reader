@@ -16,9 +16,15 @@ import java.net.URL
 class FeedsViewModel(private val repository: FeedRepository) : ViewModel() {
 
     val feeds: LiveData<ViewState<List<Feed>>>
-        get() = repository.feeds().asLiveData().map { ViewState.Loaded(it) }
+        get() = repository.feeds().asLiveData().map { feeds ->
+            if (feeds.isNotEmpty()) ViewState.Loaded(feeds) else ViewState.Empty
+        }
 
     fun addNew(name: String, link: URL) {
         launch { repository.add(name, link) }
+    }
+
+    fun remove(feed: Feed) {
+        launch { repository.remove(feed) }
     }
 }
