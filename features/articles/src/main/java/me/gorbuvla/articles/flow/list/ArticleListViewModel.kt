@@ -1,10 +1,14 @@
 package me.gorbuvla.articles.flow.list
 
-import androidx.lifecycle.*
-import kotlinx.coroutines.flow.*
-import me.gorbuvla.core.model.ArticleRepository
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.first
 import me.gorbuvla.core.domain.ArticleSnapshot
-import me.gorbuvla.ui.util.*
+import me.gorbuvla.core.model.ArticleRepository
+import me.gorbuvla.ui.util.ViewState
+import me.gorbuvla.ui.util.launch
+import me.gorbuvla.ui.util.loaded
 
 /**
  * ViewModel for screen with feed items.
