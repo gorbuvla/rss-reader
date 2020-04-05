@@ -1,9 +1,10 @@
 package me.gorbuvla.ui.components
 
 import androidx.compose.Composable
-import androidx.ui.layout.Container
-import androidx.ui.layout.LayoutHeight
-import androidx.ui.layout.LayoutWidth
+import androidx.ui.core.Modifier
+import androidx.ui.foundation.Box
+import androidx.ui.layout.fillMaxHeight
+import androidx.ui.layout.fillMaxWidth
 import androidx.ui.material.CircularProgressIndicator
 import androidx.ui.material.MaterialTheme
 import androidx.ui.tooling.preview.Preview
@@ -13,7 +14,7 @@ import androidx.ui.tooling.preview.Preview
  */
 @Composable
 fun CircularProgress() {
-    Container(modifier = LayoutWidth.Fill + LayoutHeight.Fill) {
+    Box(modifier = Modifier.fillMaxHeight() + Modifier.fillMaxWidth()) {
         CircularProgressIndicator()
     }
 }

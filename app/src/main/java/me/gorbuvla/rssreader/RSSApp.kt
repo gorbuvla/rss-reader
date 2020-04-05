@@ -3,6 +3,7 @@ package me.gorbuvla.rssreader
 import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
 import me.gorbuvla.articles.di.articlesModule
+import me.gorbuvla.core.di.coreModule
 import me.gorbuvla.database.di.databaseModule
 import me.gorbuvla.feeds.di.feedsModule
 import me.gorbuvla.rss.rssModule
@@ -19,7 +20,7 @@ class RSSApp : Application() {
 
         startKoin {
             androidContext(this@RSSApp)
-            modules(articlesModule, feedsModule, rssModule, databaseModule)
+            modules(articlesModule, feedsModule, coreModule, rssModule, databaseModule)
         }
     }
 }

@@ -3,19 +3,17 @@ package me.gorbuvla.articles.flow.list
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.ui.core.Text
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Icon
+import androidx.ui.foundation.Text
 import androidx.ui.layout.*
 import androidx.ui.material.*
 import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Favorite
 import me.gorbuvla.articles.flow.detail.ArticleDetailActivity
 import me.gorbuvla.articles.flow.list.ui.ArticleList
-import me.gorbuvla.core.domain.Article
+import me.gorbuvla.core.domain.ArticleSnapshot
 import me.gorbuvla.ui.util.ViewState
-import me.gorbuvla.ui.components.CircularProgress
-import me.gorbuvla.ui.components.RetrySnackbar
 import me.gorbuvla.ui.util.observe
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -49,7 +47,7 @@ class ArticleListActivity : AppCompatActivity() {
         }
     }
 
-    private fun openDetail(item: Article) {
+    private fun openDetail(item: ArticleSnapshot) {
         startActivity(
             Intent(this, ArticleDetailActivity::class.java)
                 .putExtras(ArticleDetailActivity.arguments(item.id))

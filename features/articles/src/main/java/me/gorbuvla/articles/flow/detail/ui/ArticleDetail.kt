@@ -1,10 +1,14 @@
 package me.gorbuvla.articles.flow.detail.ui
 
 import androidx.compose.Composable
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
-import androidx.ui.layout.*
-import androidx.ui.material.EmphasisLevels
+import androidx.ui.layout.Column
+import androidx.ui.layout.LayoutHeight
+import androidx.ui.layout.Spacer
+import androidx.ui.layout.fillMaxSize
+import androidx.ui.layout.padding
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.ProvideEmphasis
 import androidx.ui.tooling.preview.Preview
@@ -17,10 +21,10 @@ import org.threeten.bp.ZonedDateTime
  */
 @Composable
 fun ArticleDetailContent(data: Article) {
-    val typography = MaterialTheme.typography()
-    val emphasisLevels = EmphasisLevels()
+    val typography = MaterialTheme.typography
+    val emphasisLevels = MaterialTheme.emphasisLevels
     VerticalScroller {
-        Column(modifier = LayoutSize.Fill + LayoutPadding(16.dp)) {
+        Column(modifier = Modifier.fillMaxSize() + Modifier.padding(16.dp)) {
             ProvideEmphasis(emphasis = emphasisLevels.high) {
                 Text(
                     text = data.title,
