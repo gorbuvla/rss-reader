@@ -18,6 +18,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.core:core-ktx:$corektx_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.browser:browser:1.2.0"
 
     implementation "androidx.compose:compose-runtime:$compose_version"
 

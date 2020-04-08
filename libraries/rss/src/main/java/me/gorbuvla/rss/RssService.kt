@@ -10,6 +10,7 @@ import me.gorbuvla.core.rss.RssInteractor
 import org.threeten.bp.Instant
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
+import timber.log.Timber
 import java.net.URL
 
 /**
@@ -21,6 +22,10 @@ class RssService(private val fetcher: FeedFetcher) : RssInteractor {
         return withContext(Dispatchers.IO) {
             val result = urls.flatMap { url ->
                 val entries = fetcher.retrieveFeed(url).entries
+
+                val sho = entries.first()
+
+                Timber.i("SHO: $sho")
 
                 entries.map { (it as SyndEntry).toArticle() }
             }
@@ -35,6 +40,8 @@ private fun SyndEntry.toArticle(): Article {
         id = 0,
         title = title,
         content = (contents.first() as SyndContent).value,
+        author = author,
+        link = link,
         createdAt = ZonedDateTime.ofInstant(Instant.ofEpochMilli(updatedDate.time), ZoneId.systemDefault())
     )
 }

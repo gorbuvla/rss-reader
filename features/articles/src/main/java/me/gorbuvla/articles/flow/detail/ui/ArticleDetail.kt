@@ -38,7 +38,7 @@ fun ArticleDetailContent(data: Article) {
 
             ProvideEmphasis(emphasis = emphasisLevels.disabled) {
                 Text(
-                    text = data.createdAt.formatDate(ContextAmbient.current),
+                    text = data.createdAt.formatDate(ContextAmbient.current) + " " + data.author,
                     style = typography.caption
                 )
             }
@@ -58,7 +58,7 @@ fun ArticleDetailContent(data: Article) {
 @Preview
 @Composable
 private fun FeedDetailPreview() {
-    val data = Article(1, "Blog title", "Blog conent", ZonedDateTime.now())
+    val data = Article(1, "Blog title", "Blog conent", "", "", ZonedDateTime.now())
     MaterialTheme {
         ArticleDetailContent(data = data)
     }

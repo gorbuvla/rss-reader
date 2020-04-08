@@ -15,6 +15,8 @@ data class DbArticle(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val title: String,
     val content: String,
+    val author: String,
+    val link: String,
     val publishedAt: Long
 ) {
 
@@ -23,6 +25,8 @@ data class DbArticle(
             id = id,
             title = title,
             content = content,
+            author = author,
+            link = link,
             createdAt = ZonedDateTime.ofInstant(Instant.ofEpochMilli(publishedAt), ZoneId.systemDefault())
         )
     }

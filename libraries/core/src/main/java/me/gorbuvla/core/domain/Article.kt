@@ -6,5 +6,7 @@ data class Article(
     val id: Int,
     val title: String,
     val content: String,
+    val author: String,
+    val link: String,
     val createdAt: ZonedDateTime
 )

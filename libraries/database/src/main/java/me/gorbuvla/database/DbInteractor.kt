@@ -53,6 +53,8 @@ class DbInteractorImpl(
             id = 0,
             title = title,
             content = content,
+            author = author,
+            link = link,
             publishedAt = createdAt.toInstant().toEpochMilli()
         )
     }
