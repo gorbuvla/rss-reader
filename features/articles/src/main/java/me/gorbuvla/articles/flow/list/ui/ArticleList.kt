@@ -1,7 +1,12 @@
 package me.gorbuvla.articles.flow.list.ui
 
+import android.content.Context
 import android.text.Html
+import android.text.format.DateUtils
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.compose.ambientOf
+import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.AdapterList
 import androidx.ui.foundation.Box
@@ -25,6 +30,8 @@ import androidx.ui.unit.dp
 import me.gorbuvla.core.domain.ArticleSnapshot
 import me.gorbuvla.ui.compose.padding
 import me.gorbuvla.ui.compose.plus
+import org.threeten.bp.ZonedDateTime
+import java.util.*
 
 /**
  * Set of composable views to show list of feeds.
@@ -54,6 +61,13 @@ private fun ArticleItem(article: ArticleSnapshot, onClick: () -> Unit) {
                     )
                 }
 
+                ProvideEmphasis(emphasis = emphasisLevels.disabled) {
+                    Text(
+                        text = article.createdAt.formatDate(ContextAmbient.current),
+                        style = typography.caption
+                    )
+                }
+
                 Spacer(modifier = Modifier.preferredHeight(8.dp))
 
                 ProvideEmphasis(emphasis = emphasisLevels.medium) {
@@ -69,6 +83,11 @@ private fun ArticleItem(article: ArticleSnapshot, onClick: () -> Unit) {
     }
 }
 
+@Composable // yes, it has to be... 🙄
+private fun ZonedDateTime.formatDate(context: Context): String {
+    return DateUtils.formatDateTime(ContextAmbient.current, toInstant().toEpochMilli(), DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_SHOW_YEAR)
+}
+
 @Preview
 @Composable
 private fun FeedListPreview() {
@@ -76,7 +95,8 @@ private fun FeedListPreview() {
         ArticleSnapshot(
             it,
             "Blog $it",
-            "Blog $it preview"
+            "Blog $it preview",
+            ZonedDateTime.now()
         )
     }
     MaterialTheme {

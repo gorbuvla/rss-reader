@@ -52,7 +52,8 @@ class DbInteractorImpl(
         return DbArticle(
             id = 0,
             title = title,
-            content = content
+            content = content,
+            publishedAt = createdAt.toInstant().toEpochMilli()
         )
     }
 

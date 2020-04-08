@@ -3,6 +3,8 @@ package me.gorbuvla.database.entities
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import me.gorbuvla.core.domain.Article
+import org.threeten.bp.Instant
+import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 
 /**
@@ -12,7 +14,8 @@ import org.threeten.bp.ZonedDateTime
 data class DbArticle(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val title: String,
-    val content: String
+    val content: String,
+    val publishedAt: Long
 ) {
 
     fun toArticle(): Article {
@@ -20,7 +23,7 @@ data class DbArticle(
             id = id,
             title = title,
             content = content,
-            createdAt = ZonedDateTime.now() // TODO: fixme
+            createdAt = ZonedDateTime.ofInstant(Instant.ofEpochMilli(publishedAt), ZoneId.systemDefault())
         )
     }
 }
@@ -37,7 +40,7 @@ interface ArticleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(vararg articles: DbArticle)
 
-    @Query("SELECT * FROM article")
+    @Query("SELECT * FROM article ORDER BY publishedAt DESC")
     fun articles(): Flow<List<DbArticle>>
 
     @Query("SELECT * FROM article WHERE id = :id LIMIT(1)")

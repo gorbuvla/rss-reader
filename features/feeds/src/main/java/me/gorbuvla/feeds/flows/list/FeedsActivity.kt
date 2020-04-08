@@ -11,6 +11,8 @@ import androidx.ui.material.IconButton
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
 import androidx.ui.material.icons.Icons
+import androidx.ui.material.icons.filled.Add
+import androidx.ui.material.icons.filled.ArrowBack
 import androidx.ui.material.icons.filled.Close
 import androidx.ui.material.icons.filled.Favorite
 import me.gorbuvla.core.domain.Feed
@@ -42,12 +44,12 @@ class FeedsActivity : AppCompatActivity() {
                         title = { Text(text = "Feeds") },
                         navigationIcon = {
                             IconButton(onClick = { finish() }) {
-                                Icon(Icons.Filled.Close)
+                                Icon(Icons.Filled.ArrowBack)
                             }
                         },
                         actions = {
                             IconButton(onClick = { addPresented.value = true }) {
-                                Icon(Icons.Default.Favorite) // TODO: change later to add icon?
+                                Icon(Icons.Default.Add)
                             }
                         })
 

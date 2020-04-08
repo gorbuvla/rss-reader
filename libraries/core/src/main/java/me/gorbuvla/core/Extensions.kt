@@ -13,7 +13,8 @@ import timber.log.Timber
 /**
  * TODO add class description
  */
-suspend fun <T> Flow<T>.into(viewState: MutableLiveData<ViewState<T>>) {
-    collect { viewState.loaded(it) }
+fun <T> Flow<T>.into(viewState: MutableLiveData<ViewState<T>>): Flow<T> {
+    return onEach { viewState.loaded(it) }
+        .catch { viewState.error(it) }
 }
 

@@ -10,8 +10,11 @@ import androidx.ui.foundation.Text
 import androidx.ui.layout.Column
 import androidx.ui.material.*
 import androidx.ui.material.icons.Icons
+import androidx.ui.material.icons.filled.Add
+import androidx.ui.material.icons.filled.ArrowBack
 import androidx.ui.material.icons.filled.Close
 import androidx.ui.material.icons.filled.Favorite
+import androidx.ui.material.icons.filled.Share
 import me.gorbuvla.articles.flow.detail.ui.ArticleDetailContent
 import me.gorbuvla.ui.components.CircularProgress
 import me.gorbuvla.ui.components.RetrySnackbar
@@ -49,12 +52,12 @@ class ArticleDetailActivity : AppCompatActivity() {
                     TopAppBar(title = { Text(text = "Detail")},
                         navigationIcon = {
                             IconButton(onClick = { finish() }) {
-                                Icon(Icons.Filled.Close)
+                                Icon(Icons.Filled.ArrowBack)
                             }
                         },
                         actions = {
                             IconButton(onClick = { share() }) {
-                                Icon(Icons.Default.Favorite) // TODO: change later to share icon
+                                Icon(Icons.Default.Share)
                             }
                         })
 

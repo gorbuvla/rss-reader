@@ -28,7 +28,7 @@ class ArticleDetailViewModel(
         viewState.loading()
 
         launch {
-            repository.observeArticle(id)
+            repository.article(id)
                 .into(viewState)
         }
     }
