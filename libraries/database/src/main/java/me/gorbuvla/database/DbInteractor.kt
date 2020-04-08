@@ -29,7 +29,7 @@ class DbInteractorImpl(
             .map { list -> list.map { it.toArticle() } }
     }
 
-    override fun article(id: Int): Flow<Article> {
+    override fun article(id: String): Flow<Article> {
         return articleDao.article(id)
             .distinctUntilChanged()
             .map { it.first().toArticle() }
@@ -50,15 +50,18 @@ class DbInteractorImpl(
 
     private fun Article.toDbArticle(): DbArticle {
         return DbArticle(
-            id = 0,
+            id = id,
             title = title,
-            content = content
+            content = content,
+            author = author,
+            link = link,
+            publishedAt = createdAt.toInstant().toEpochMilli()
         )
     }
 
     private fun Feed.toDbFeed(): DbFeed {
         return DbFeed(
-            id = 0,
+            id = url.toString(),
             name = name,
             url = url.toString()
         )

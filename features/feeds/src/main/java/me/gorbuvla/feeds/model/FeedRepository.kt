@@ -19,7 +19,7 @@ interface FeedRepository {
 
 class FeedRepositoryImpl(private val db: DatabaseInteractor): FeedRepository {
 
-    override suspend fun add(name: String, url: URL) = db.store(Feed(id = 0, name = name, url = url))
+    override suspend fun add(name: String, url: URL) = db.store(Feed(id = url.toString(), name = name, url = url))
 
     override suspend fun remove(feed: Feed) = db.remove(feed)
 

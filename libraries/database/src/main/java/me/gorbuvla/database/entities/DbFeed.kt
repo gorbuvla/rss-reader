@@ -10,14 +10,14 @@ import java.net.URL
  */
 @Entity(tableName = "feed")
 data class DbFeed(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey val id: String,
     val name: String,
     val url: String
 ) {
 
     fun toFeed(): Feed {
         return Feed(
-            id = id,
+            id = url,
             name = name,
             url = URL(url)
         )
@@ -34,5 +34,5 @@ interface FeedDao {
     fun feeds(): Flow<List<DbFeed>>
 
     @Query("DELETE FROM feed WHERE id = :feedId")
-    suspend fun delete(feedId: Int)
+    suspend fun delete(feedId: String)
 }

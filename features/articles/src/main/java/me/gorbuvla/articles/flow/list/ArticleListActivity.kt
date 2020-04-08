@@ -9,7 +9,8 @@ import androidx.ui.foundation.Text
 import androidx.ui.layout.*
 import androidx.ui.material.*
 import androidx.ui.material.icons.Icons
-import androidx.ui.material.icons.filled.Favorite
+import androidx.ui.material.icons.filled.Face
+import androidx.ui.material.icons.filled.List
 import me.gorbuvla.articles.flow.detail.ArticleDetailActivity
 import me.gorbuvla.articles.flow.list.ui.ArticleList
 import me.gorbuvla.core.domain.ArticleSnapshot
@@ -32,15 +33,20 @@ class ArticleListActivity : AppCompatActivity() {
                     TopAppBar(
                         title = { Text(text = "RSS reader") },
                         actions = {
+                            when (observe(data = viewModel.loading)) {
+                                is ViewState.Loading -> CircularProgressIndicator(color = MaterialTheme.colors.onPrimary)
+                                is ViewState.Loaded -> IconButton(onClick = { viewModel.loadLatest() }) {
+                                    Icon(Icons.Default.Face)
+                                }
+                            }
+
                             IconButton(onClick = { openFeeds() }) {
-                                Icon(Icons.Default.Favorite) // TODO: change later to feed icon?
+                                Icon(Icons.Default.List)
                             }
                         })
 
                     when (val state = observe(data = viewModel.articles)) {
-                        is ViewState.Loaded -> {
-                            ArticleList(data = state.data, onItemClick = ::openDetail)
-                        }
+                        is ViewState.Loaded -> ArticleList(data = state.data, onItemClick = ::openDetail)
                     }
                 }
             }

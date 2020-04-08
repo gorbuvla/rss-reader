@@ -1,7 +1,12 @@
 package me.gorbuvla.articles.flow.list.ui
 
+import android.content.Context
 import android.text.Html
+import android.text.format.DateUtils
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.compose.ambientOf
+import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.AdapterList
 import androidx.ui.foundation.Box
@@ -22,9 +27,12 @@ import androidx.ui.text.font.FontWeight
 import androidx.ui.text.style.TextOverflow
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
+import me.gorbuvla.articles.util.formatDate
 import me.gorbuvla.core.domain.ArticleSnapshot
 import me.gorbuvla.ui.compose.padding
 import me.gorbuvla.ui.compose.plus
+import org.threeten.bp.ZonedDateTime
+import java.util.*
 
 /**
  * Set of composable views to show list of feeds.
@@ -54,6 +62,13 @@ private fun ArticleItem(article: ArticleSnapshot, onClick: () -> Unit) {
                     )
                 }
 
+                ProvideEmphasis(emphasis = emphasisLevels.disabled) {
+                    Text(
+                        text = article.createdAt.formatDate(ContextAmbient.current),
+                        style = typography.caption
+                    )
+                }
+
                 Spacer(modifier = Modifier.preferredHeight(8.dp))
 
                 ProvideEmphasis(emphasis = emphasisLevels.medium) {
@@ -74,9 +89,10 @@ private fun ArticleItem(article: ArticleSnapshot, onClick: () -> Unit) {
 private fun FeedListPreview() {
     val feed = (0..2).map {
         ArticleSnapshot(
-            it,
+            "id",
             "Blog $it",
-            "Blog $it preview"
+            "Blog $it preview",
+            ZonedDateTime.now()
         )
     }
     MaterialTheme {

@@ -7,6 +7,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.gorbuvla.core.domain.Article
 import me.gorbuvla.core.rss.RssInteractor
+import org.jsoup.Jsoup
+import org.jsoup.safety.Whitelist
 import org.threeten.bp.Instant
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
@@ -32,9 +34,11 @@ class RssService(private val fetcher: FeedFetcher) : RssInteractor {
 
 private fun SyndEntry.toArticle(): Article {
     return Article(
-        id = 0,
+        id = link,
         title = title,
-        content = (contents.first() as SyndContent).value,
+        content = Jsoup.clean((contents.first() as SyndContent).value, Whitelist.basic()),
+        author = author,
+        link = link,
         createdAt = ZonedDateTime.ofInstant(Instant.ofEpochMilli(updatedDate.time), ZoneId.systemDefault())
     )
 }

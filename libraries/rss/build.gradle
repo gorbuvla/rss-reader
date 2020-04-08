@@ -12,6 +12,7 @@ dependencies {
 
     implementation "com.jakewharton.timber:timber:$timber_version"
     implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
+    implementation "org.jsoup:jsoup:1.13.1"
 
     implementation "androidx.core:core-ktx:$corektx_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"

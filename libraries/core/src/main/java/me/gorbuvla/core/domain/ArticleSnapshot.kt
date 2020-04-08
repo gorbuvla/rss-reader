@@ -1,10 +1,10 @@
 package me.gorbuvla.core.domain
 
-/**
- * TODO add class description
- */
+import org.threeten.bp.ZonedDateTime
+
 data class ArticleSnapshot(
-    val id: Int,
+    val id: String,
     val title: String,
-    val preview: String
+    val preview: String,
+    val createdAt: ZonedDateTime
 )
