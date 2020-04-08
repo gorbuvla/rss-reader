@@ -27,6 +27,7 @@ import androidx.ui.text.font.FontWeight
 import androidx.ui.text.style.TextOverflow
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
+import me.gorbuvla.articles.util.formatDate
 import me.gorbuvla.core.domain.ArticleSnapshot
 import me.gorbuvla.ui.compose.padding
 import me.gorbuvla.ui.compose.plus
@@ -81,11 +82,6 @@ private fun ArticleItem(article: ArticleSnapshot, onClick: () -> Unit) {
             }
         }
     }
-}
-
-@Composable // yes, it has to be... 🙄
-private fun ZonedDateTime.formatDate(context: Context): String {
-    return DateUtils.formatDateTime(ContextAmbient.current, toInstant().toEpochMilli(), DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_SHOW_YEAR)
 }
 
 @Preview

@@ -1,6 +1,7 @@
 package me.gorbuvla.articles.flow.detail.ui
 
 import androidx.compose.Composable
+import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
@@ -13,6 +14,7 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.material.ProvideEmphasis
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
+import me.gorbuvla.articles.util.formatDate
 import me.gorbuvla.core.domain.Article
 import org.threeten.bp.ZonedDateTime
 
@@ -36,7 +38,7 @@ fun ArticleDetailContent(data: Article) {
 
             ProvideEmphasis(emphasis = emphasisLevels.disabled) {
                 Text(
-                    text = data.createdAt.toString(),
+                    text = data.createdAt.formatDate(ContextAmbient.current),
                     style = typography.caption
                 )
             }

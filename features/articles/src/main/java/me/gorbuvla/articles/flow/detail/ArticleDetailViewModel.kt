@@ -3,6 +3,8 @@ package me.gorbuvla.articles.flow.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.launchIn
 import me.gorbuvla.core.model.ArticleRepository
 import me.gorbuvla.core.domain.Article
 import me.gorbuvla.core.into
@@ -27,9 +29,8 @@ class ArticleDetailViewModel(
     init {
         viewState.loading()
 
-        launch {
-            repository.article(id)
-                .into(viewState)
-        }
+        repository.article(id)
+            .into(viewState)
+            .launchIn(viewModelScope)
     }
 }
