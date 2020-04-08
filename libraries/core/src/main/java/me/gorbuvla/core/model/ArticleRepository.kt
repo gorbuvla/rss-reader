@@ -23,7 +23,7 @@ interface ArticleRepository {
 
     fun articles(): Flow<List<ArticleSnapshot>>
 
-    fun article(id: Int): Flow<Article>
+    fun article(id: String): Flow<Article>
 }
 
 internal class ArticleRepositoryImpl(
@@ -61,7 +61,7 @@ internal class ArticleRepositoryImpl(
         }
     }
 
-    override fun article(id: Int): Flow<Article> {
+    override fun article(id: String): Flow<Article> {
         return db.article(id)
     }
 

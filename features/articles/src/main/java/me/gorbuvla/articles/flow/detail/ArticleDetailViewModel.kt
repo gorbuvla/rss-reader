@@ -14,7 +14,7 @@ import me.gorbuvla.ui.util.*
  * ViewModel for screen with feed detail.
  */
 class ArticleDetailViewModel(
-    id: Int, repository: ArticleRepository
+    id: String, repository: ArticleRepository
 ): ViewModel() {
 
     private val viewState = MutableLiveData<ViewState<Article>>()

@@ -33,15 +33,15 @@ class ArticleListActivity : AppCompatActivity() {
                     TopAppBar(
                         title = { Text(text = "RSS reader") },
                         actions = {
-                            IconButton(onClick = { openFeeds() }) {
-                                Icon(Icons.Default.List)
-                            }
-
                             when (observe(data = viewModel.loading)) {
                                 is ViewState.Loading -> CircularProgressIndicator(color = MaterialTheme.colors.onPrimary)
                                 is ViewState.Loaded -> IconButton(onClick = { viewModel.loadLatest() }) {
                                     Icon(Icons.Default.Face)
                                 }
+                            }
+
+                            IconButton(onClick = { openFeeds() }) {
+                                Icon(Icons.Default.List)
                             }
                         })
 

@@ -89,7 +89,7 @@ private fun ArticleItem(article: ArticleSnapshot, onClick: () -> Unit) {
 private fun FeedListPreview() {
     val feed = (0..2).map {
         ArticleSnapshot(
-            it,
+            "id",
             "Blog $it",
             "Blog $it preview",
             ZonedDateTime.now()
