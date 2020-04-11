@@ -19,7 +19,7 @@ Wondering what all these emojis are? Checkout [gitmoji](https://gitmoji.carloscu
 
 ## Structure
 
-Because of experimental compose compilercompativility issues, app is split up into several modules.
+Because of experimental compose compiler compatibility issues, app is split up into several modules.
 Each module is an Android Library and is designed in a way so that Compose, Room and experimental Flow api
 do not reside in single module.
 
@@ -43,3 +43,11 @@ Module responsible for local data persistence.
 Module responsible for remote RSS data access.
 - **:ui**
 Presentation related code which can be shared between features.
+
+## Compose pitfalls
+
+- No other way to use Room & Flow with Compose than modularize the app 🤷‍
+- [Issue](https://issuetracker.google.com/issues/150174792) General problem with lists. **VerticalScroller** is ok for limited amount of data, however when used to present list of articles it takes half day to be drawn.
+So using **AdapterList** is much better in this case, but it has its own pitfalls. Once list data is loaded and user starts scrolling, previously used composables for row items are not reused/disposed, which
+makes app leak like ones 🍑 after 🥛 + 🥒.
+- [Compose Slack](https://kotlinlang.slack.com/archives/CJLTWPH7S/p1586083806130100) I had to simplify design because of some component incompatibility. Generally, there are adapters for each composable component. And adapter **Card** seems to not behave properly with **AdapterList**.
