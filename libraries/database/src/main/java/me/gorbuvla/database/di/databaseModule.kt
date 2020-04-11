@@ -15,8 +15,8 @@ val databaseModule = module {
         Room.databaseBuilder(androidContext(), RssDatabase::class.java, "rss.db")
             .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
-                    db.execSQL("INSERT INTO feed (id, name, url) VALUES(1, 'Android Developers Blog', 'http://android-developers.blogspot.com/atom.xml')")
-                    db.execSQL("INSERT INTO feed (id, name, url) VALUES(2, 'Swift News', 'https://swift.org/atom.xml?format=xml')")
+                    db.execSQL("INSERT INTO feed (id, name, url) VALUES('http://android-developers.blogspot.com/atom.xml', 'Android Developers Blog', 'http://android-developers.blogspot.com/atom.xml')")
+                    db.execSQL("INSERT INTO feed (id, name, url) VALUES('https://swift.org/atom.xml?format=xml', 'Swift News', 'https://swift.org/atom.xml?format=xml')")
                 }
             })
             .build()

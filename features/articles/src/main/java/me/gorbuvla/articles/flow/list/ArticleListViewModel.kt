@@ -17,21 +17,16 @@ import me.gorbuvla.ui.util.wrapResult
 
 /**
  * ViewModel for screen with feed items.
- * TODO: fix weird leaks with flow observation
  */
 class ArticleListViewModel(private val repository: ArticleRepository) : ViewModel() {
 
     private val loadingState = MutableLiveData<ViewState<Unit>>()
 
     val loading: LiveData<ViewState<Unit>>
-        get() = loadingState
+        get() = repository.fetchState.asLiveData()
 
     val articles: LiveData<ViewState<List<ArticleSnapshot>>>
         get() = repository.articles().asLiveData().map { if (it.isNotEmpty()) ViewState.Loaded(it) else ViewState.Empty }
-
-    init {
-        loadLatest()
-    }
 
     fun loadLatest() {
         loadingState.loading()
