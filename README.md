@@ -13,7 +13,6 @@ Wondering what all these emojis are? Checkout [gitmoji](https://gitmoji.carloscu
 ## Tech stack
 
 * Jetpack Compose
-* Kotlin corutines & flow
+* Kotlin corutines & Flow
 * Koin
-* OkHttp & Retrofit (TBD)
 * Architecture components
