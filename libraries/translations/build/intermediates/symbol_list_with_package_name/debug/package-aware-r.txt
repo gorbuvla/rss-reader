@@ -1,3 +1,0 @@
-me.gorbuvla.translations
-string article_detail_title
-string general_ok

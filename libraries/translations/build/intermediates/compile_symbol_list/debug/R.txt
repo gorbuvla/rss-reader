@@ -1,2 +1,0 @@
-int string article_detail_title 0x0
-int string general_ok 0x0
