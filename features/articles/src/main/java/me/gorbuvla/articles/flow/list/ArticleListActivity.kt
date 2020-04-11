@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Icon
 import androidx.ui.foundation.Text
-import androidx.ui.layout.*
-import androidx.ui.material.*
+import androidx.ui.layout.Column
+import androidx.ui.material.CircularProgressIndicator
+import androidx.ui.material.IconButton
+import androidx.ui.material.MaterialTheme
+import androidx.ui.material.TopAppBar
 import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Face
 import androidx.ui.material.icons.filled.List
