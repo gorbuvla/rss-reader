@@ -16,12 +16,12 @@ import androidx.ui.material.icons.filled.*
 import me.gorbuvla.articles.flow.detail.ui.ArticleDetailContent
 import me.gorbuvla.ui.components.CircularProgress
 import me.gorbuvla.ui.components.RetrySnackbar
+import me.gorbuvla.ui.compose.string
 import me.gorbuvla.ui.util.ViewState
 import me.gorbuvla.ui.util.observe
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.DefinitionParameters
 import org.koin.core.parameter.parametersOf
-import java.net.URL
 
 /**
  * Activity for feed detail screen.
@@ -45,10 +45,11 @@ class ArticleDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        R.string.general_ok1
         setContent {
             MaterialTheme {
                 Column {
-                    TopAppBar(title = { Text(text = "Detail")},
+                    TopAppBar(title = { Text(text = string(resId = R.string.gee))},
                         navigationIcon = {
                             IconButton(onClick = { finish() }) {
                                 Icon(Icons.Filled.ArrowBack)

@@ -13,6 +13,7 @@ android {
 
 dependencies {
     implementation project(":libraries:core")
+    implementation project(":libraries:translations")
     implementation project(":libraries:ui")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

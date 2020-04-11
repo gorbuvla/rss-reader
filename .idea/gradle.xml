@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/libraries/core" />
             <option value="$PROJECT_DIR$/libraries/database" />
             <option value="$PROJECT_DIR$/libraries/rss" />
+            <option value="$PROJECT_DIR$/libraries/translations" />
             <option value="$PROJECT_DIR$/libraries/ui" />
           </set>
         </option>
