@@ -20,6 +20,7 @@ class DbInteractorImpl(
 ): DatabaseInteractor {
 
     override suspend fun store(data: List<Article>) {
+        articleDao.clear()
         articleDao.replace(*data.map { it.toDbArticle() }.toTypedArray())
     }
 

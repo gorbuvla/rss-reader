@@ -13,6 +13,7 @@ import org.threeten.bp.Instant
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 import java.net.URL
+import java.util.*
 
 /**
  * Service for loading remote rss data.
@@ -39,6 +40,6 @@ private fun SyndEntry.toArticle(): Article {
         content = Jsoup.clean((contents.first() as SyndContent).value, Whitelist.basic()),
         author = author,
         link = link,
-        createdAt = ZonedDateTime.ofInstant(Instant.ofEpochMilli(updatedDate.time), ZoneId.systemDefault())
+        createdAt = ZonedDateTime.ofInstant(Instant.ofEpochMilli((updatedDate ?: publishedDate ?: Date()).time), ZoneId.systemDefault())
     )
 }

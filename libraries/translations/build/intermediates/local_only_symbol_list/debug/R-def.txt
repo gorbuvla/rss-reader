@@ -1,0 +1,4 @@
+R_DEF: Internal format may change without notice
+local
+string article_detail_title
+string general_ok
