@@ -5,11 +5,13 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.compose.getValue
 import androidx.core.os.bundleOf
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Icon
 import androidx.ui.foundation.Text
 import androidx.ui.layout.Column
+import androidx.ui.livedata.observeAsState
 import androidx.ui.material.*
 import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.*
@@ -17,11 +19,9 @@ import me.gorbuvla.articles.flow.detail.ui.ArticleDetailContent
 import me.gorbuvla.ui.components.CircularProgress
 import me.gorbuvla.ui.components.RetrySnackbar
 import me.gorbuvla.ui.util.ViewState
-import me.gorbuvla.ui.util.observe
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.DefinitionParameters
 import org.koin.core.parameter.parametersOf
-import java.net.URL
 
 /**
  * Activity for feed detail screen.
@@ -63,8 +63,9 @@ class ArticleDetailActivity : AppCompatActivity() {
                             }
                         })
 
+                    val viewState by viewModel.state.observeAsState()
 
-                    when (val state = observe(data = viewModel.state)) {
+                    when (val state = viewState) {
                         is ViewState.Loading -> CircularProgress()
                         is ViewState.Loaded -> ArticleDetailContent(data = state.data)
                         is ViewState.Error -> RetrySnackbar(text = state.error.localizedMessage ?: "Error")

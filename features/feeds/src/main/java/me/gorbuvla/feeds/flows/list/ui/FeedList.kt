@@ -7,6 +7,7 @@ import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.*
+import androidx.ui.material.EmphasisAmbient
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.ProvideEmphasis
 import androidx.ui.material.ripple.ripple
@@ -30,7 +31,7 @@ fun FeedList(data: List<Feed>, onClick: (Feed) -> Unit) {
 @Composable
 private fun FeedItem(item: Feed, onClick: () -> Unit) {
     val typography = MaterialTheme.typography
-    val emphasisLevels = MaterialTheme.emphasisLevels
+    val emphasisLevels = EmphasisAmbient.current
 
     Clickable(modifier = Modifier.ripple(bounded = true), onClick = onClick) {
         Column {

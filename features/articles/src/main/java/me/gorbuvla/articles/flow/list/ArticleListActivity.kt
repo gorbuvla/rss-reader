@@ -3,10 +3,12 @@ package me.gorbuvla.articles.flow.list
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.getValue
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Icon
 import androidx.ui.foundation.Text
 import androidx.ui.layout.Column
+import androidx.ui.livedata.observeAsState
 import androidx.ui.material.CircularProgressIndicator
 import androidx.ui.material.IconButton
 import androidx.ui.material.MaterialTheme
@@ -18,7 +20,6 @@ import me.gorbuvla.articles.flow.detail.ArticleDetailActivity
 import me.gorbuvla.articles.flow.list.ui.ArticleList
 import me.gorbuvla.core.domain.ArticleSnapshot
 import me.gorbuvla.ui.util.ViewState
-import me.gorbuvla.ui.util.observe
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -36,7 +37,8 @@ class ArticleListActivity : AppCompatActivity() {
                     TopAppBar(
                         title = { Text(text = "RSS reader") },
                         actions = {
-                            when (observe(data = viewModel.loading)) {
+                            val loadingState by viewModel.loading.observeAsState()
+                            when (loadingState) {
                                 is ViewState.Loading -> CircularProgressIndicator(color = MaterialTheme.colors.onPrimary)
                                 is ViewState.Loaded -> IconButton(onClick = { viewModel.loadLatest() }) {
                                     Icon(Icons.Default.Face)
@@ -48,7 +50,10 @@ class ArticleListActivity : AppCompatActivity() {
                             }
                         })
 
-                    when (val state = observe(data = viewModel.articles)) {
+
+                    val articleState by viewModel.articles.observeAsState()
+
+                    when (val state = articleState) {
                         is ViewState.Loaded -> ArticleList(data = state.data, onItemClick = ::openDetail)
                     }
                 }

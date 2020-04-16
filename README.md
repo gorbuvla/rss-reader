@@ -1,7 +1,7 @@
 # RSS Reader App
 
-[![jCenter](https://img.shields.io/badge/Kotlin-1.3.71-green.svg)]()
-[![jCenter](https://img.shields.io/badge/Compose-dev08-green.svg)](https://developer.android.com/jetpack/compose)
+[![jCenter](https://img.shields.io/badge/Kotlin-1.3.72-green.svg)]()
+[![jCenter](https://img.shields.io/badge/Compose-dev09-green.svg)](https://developer.android.com/jetpack/compose)
 
 ## Project
 After trying out SwiftUI on simple project I was curious to try Compose.
