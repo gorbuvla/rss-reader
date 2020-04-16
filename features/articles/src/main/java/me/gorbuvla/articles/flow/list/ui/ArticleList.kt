@@ -1,11 +1,7 @@
 package me.gorbuvla.articles.flow.list.ui
 
-import android.content.Context
 import android.text.Html
-import android.text.format.DateUtils
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.compose.ambientOf
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.AdapterList
@@ -18,6 +14,7 @@ import androidx.ui.layout.Spacer
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.preferredHeight
 import androidx.ui.material.Divider
+import androidx.ui.material.EmphasisAmbient
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.ProvideEmphasis
 import androidx.ui.material.ripple.ripple
@@ -32,7 +29,6 @@ import me.gorbuvla.core.domain.ArticleSnapshot
 import me.gorbuvla.ui.compose.padding
 import me.gorbuvla.ui.compose.plus
 import org.threeten.bp.ZonedDateTime
-import java.util.*
 
 /**
  * Set of composable views to show list of feeds.
@@ -50,7 +46,7 @@ fun ArticleList(data: List<ArticleSnapshot>, onItemClick: (ArticleSnapshot) -> U
 @Composable
 private fun ArticleItem(article: ArticleSnapshot, onClick: () -> Unit) {
     val typography = MaterialTheme.typography
-    val emphasisLevels = MaterialTheme.emphasisLevels
+    val emphasisLevels = EmphasisAmbient.current
 
     Box(modifier = Modifier.fillMaxWidth() + Modifier.ripple()) {
         Clickable(onClick = onClick) {

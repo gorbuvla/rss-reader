@@ -7,6 +7,7 @@ import androidx.ui.core.FocusManagerAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.TextField
+import androidx.ui.foundation.TextFieldValue
 import androidx.ui.input.ImeAction
 import androidx.ui.layout.Column
 import androidx.ui.layout.Spacer
@@ -15,6 +16,7 @@ import androidx.ui.layout.preferredHeight
 import androidx.ui.material.AlertDialog
 import androidx.ui.material.Button
 import androidx.ui.material.MaterialTheme
+import androidx.ui.text.TextRange
 import androidx.ui.text.TextStyle
 import androidx.ui.unit.dp
 import me.gorbuvla.feeds.BuildConfig
@@ -67,9 +69,9 @@ fun AddFeedPrompt(presented: MutableState<Boolean>, onSubmit: (String, String) -
                 Column {
                     Stack {
                         TextField(
-                            value = nameField.value,
+                            value = TextFieldValue(nameField.value), // TODO: textFields are kinda broken in dev09 🙄
                             onValueChange = {
-                                nameField.value = it
+                                nameField.value = it.text
                                 nameError.value = ""
                             },
                             imeAction = ImeAction.Next,
@@ -95,9 +97,9 @@ fun AddFeedPrompt(presented: MutableState<Boolean>, onSubmit: (String, String) -
                     Stack {
                         TextField(
                             focusIdentifier = "2",
-                            value = linkField.value,
+                            value = TextFieldValue(linkField.value), // TODO: textFields are kinda broken in dev09 🙄
                             onValueChange = {
-                                linkField.value = it
+                                linkField.value = it.text
                                 linkError.value = ""
                             },
                             imeAction = ImeAction.Go,

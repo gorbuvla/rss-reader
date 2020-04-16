@@ -7,6 +7,7 @@ import androidx.ui.core.Modifier
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.*
+import androidx.ui.material.EmphasisAmbient
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.ProvideEmphasis
 import androidx.ui.tooling.preview.Preview
@@ -21,7 +22,7 @@ import org.threeten.bp.ZonedDateTime
 @Composable
 fun ArticleDetailContent(data: Article) {
     val typography = MaterialTheme.typography
-    val emphasisLevels = MaterialTheme.emphasisLevels
+    val emphasisLevels = EmphasisAmbient.current
     VerticalScroller {
         Column(modifier = Modifier.fillMaxSize() + Modifier.padding(16.dp)) {
             ProvideEmphasis(emphasis = emphasisLevels.high) {
