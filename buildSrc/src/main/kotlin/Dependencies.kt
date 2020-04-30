@@ -3,7 +3,7 @@ import org.gradle.api.JavaVersion
 object Config {
     const val kotlinVersion = "1.3.72"
 
-    const val minSdk = 26
+    const val minSdk = 24
     const val compileSdk = 29
     const val targetSdk = 29
     val javaVersion = JavaVersion.VERSION_1_8
@@ -21,6 +21,7 @@ object Deps {
     private const val appcompat_version = "1.1.0"
     const val appCompat = "androidx.appcompat:appcompat:$appcompat_version"
 
+    // Koin
     private const val koin_version = "2.1.5"
     const val koin = "org.koin:koin-android:$koin_version"
     const val koinScope = "org.koin:koin-androidx-scope:$koin_version"
@@ -39,9 +40,8 @@ object Deps {
     const val browser = "androidx.browser:browser:1.2.0"
 
     // Compose
-
-    const val compose_version = "0.1.0-dev09"
-    const val compose_compiler_version = "1.3.61-dev-withExperimentalGoogleExtensions-20200129"
+    const val compose_version = "0.1.0-dev10"
+    const val compose_compiler_version = "1.3.70-dev-withExperimentalGoogleExtensions-20200424"
     const val composeRuntime = "androidx.compose:compose-runtime:$compose_version"
 
     const val composeFramework = "androidx.ui:ui-framework:$compose_version"
@@ -57,19 +57,17 @@ object Deps {
     private const val jsoup_version = "1.13.1"
     const val jsoup = "org.jsoup:jsoup:$jsoup_version"
 
-    // room
-
+    // Room
     private const val room_version = "2.2.5"
     const val roomKtx = "androidx.room:room-ktx:$room_version"
     const val roomCompiler = "androidx.room:room-compiler:$room_version"
 
-    // work
+    // Work
     private const val work_version = "2.3.4"
     const val workRuntime = "androidx.work:work-runtime-ktx:$work_version"
     const val workGcm = "androidx.work:work-gcm:$work_version"
 
-    // testing
-
+    // Testing
     private const val junit_version = "4.12"
     const val junit = "junit:junit:$junit_version"
 }

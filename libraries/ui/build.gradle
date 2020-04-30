@@ -13,8 +13,10 @@ android {
 
 dependencies {
     implementation Deps.kotlinStdlib
+    implementation Deps.coroutines
     implementation Deps.coreKtx
     implementation Deps.appCompat
+    implementation Deps.lifecycleViewModel
 
     implementation Deps.composeRuntime
     implementation Deps.composeFramework
