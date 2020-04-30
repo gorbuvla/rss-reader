@@ -6,23 +6,21 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerVersion "$compose_compiler_version"
-        kotlinCompilerExtensionVersion "$compose_version"
+        kotlinCompilerVersion Deps.compose_compiler_version
+        kotlinCompilerExtensionVersion Deps.compose_version
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.core:core-ktx:$corektx_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation Deps.kotlinStdlib
+    implementation Deps.coreKtx
+    implementation Deps.appCompat
 
-    implementation "androidx.compose:compose-runtime:$compose_version"
+    implementation Deps.composeRuntime
+    implementation Deps.composeFramework
+    implementation Deps.composeLayout
+    implementation Deps.composeMaterial
+    implementation Deps.composeTooling
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecyclektx_version"
-    implementation "androidx.ui:ui-framework:$compose_version"
-    implementation "androidx.ui:ui-layout:$compose_version"
-    implementation "androidx.ui:ui-material:$compose_version"
-    implementation "androidx.ui:ui-tooling:$compose_version"
-
-    testImplementation "junit:junit:4.12"
+    testImplementation Deps.junit
 }

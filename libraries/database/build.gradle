@@ -5,14 +5,14 @@ apply plugin: 'kotlin-kapt'
 dependencies {
     implementation project(":libraries:core")
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "org.koin:koin-android:$koin_version"
+    implementation Deps.kotlinStdlib
+    implementation Deps.koin
 
-    implementation "androidx.room:room-ktx:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    implementation Deps.roomKtx
+    kapt Deps.roomCompiler
 
-    implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
-    implementation "com.jakewharton.timber:timber:$timber_version"
+    implementation Deps.threeTen
+    implementation Deps.timber
 
-    testImplementation "junit:junit:$junit_version"
+    testImplementation Deps.junit
 }

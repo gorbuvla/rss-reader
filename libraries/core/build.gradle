@@ -4,15 +4,19 @@ apply from: '../../gradle/common.gradle'
 dependencies {
     implementation project(":libraries:ui")
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.core:core-ktx:$corektx_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation Deps.kotlinStdlib
+    implementation Deps.coreKtx
+    implementation Deps.appCompat
 
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation Deps.koin
 
-    implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
-    implementation "com.jakewharton.timber:timber:$timber_version"
+    implementation Deps.coroutines
 
-    testImplementation "junit:junit:$junit_version"
+    implementation Deps.threeTen
+    implementation Deps.timber
+
+    implementation Deps.workRuntime
+    implementation Deps.workGcm
+
+    testImplementation Deps.junit
 }
