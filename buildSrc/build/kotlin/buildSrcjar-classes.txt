@@ -1,1 +1,0 @@
-/Users/vladgorbunov/Projects/rssreader/buildSrc/build/classes/kotlin/main/Config.class:/Users/vladgorbunov/Projects/rssreader/buildSrc/build/classes/kotlin/main/Deps.class
