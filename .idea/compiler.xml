@@ -5,6 +5,7 @@
       <module name="app" target="1.8" />
       <module name="RSS_Reader.app" target="1.8" />
       <module name="RSS_Reader.articles" target="1.8" />
+      <module name="RSS_Reader.buildSrc" target="1.8" />
       <module name="RSS_Reader.database" target="1.8" />
       <module name="RSS_Reader.features.articles" target="1.8" />
       <module name="RSS_Reader.features.feeds" target="1.8" />

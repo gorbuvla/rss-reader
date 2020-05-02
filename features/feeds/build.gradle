@@ -6,8 +6,8 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerVersion "$compose_compiler_version"
-        kotlinCompilerExtensionVersion "$compose_version"
+        kotlinCompilerVersion Deps.compose_compiler_version
+        kotlinCompilerExtensionVersion Deps.compose_version
     }
 }
 
@@ -15,28 +15,29 @@ dependencies {
     implementation project(":libraries:core")
     implementation project(":libraries:ui")
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.core:core-ktx:$corektx_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation Deps.kotlinStdlib
+    implementation Deps.coreKtx
+    implementation Deps.appCompat
 
-    implementation "androidx.compose:compose-runtime:$compose_version"
+    implementation Deps.browser
 
-    implementation "androidx.ui:ui-framework:$compose_version"
-    implementation "androidx.ui:ui-layout:$compose_version"
-    implementation "androidx.ui:ui-material:$compose_version"
-    implementation "androidx.ui:ui-tooling:$compose_version"
-    implementation "androidx.ui:ui-livedata:$compose_version"
+    implementation Deps.composeRuntime
+    implementation Deps.composeFramework
+    implementation Deps.composeLayout
+    implementation Deps.composeMaterial
+    implementation Deps.composeTooling
+    implementation Deps.composeLiveData
 
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
-    implementation "org.koin:koin-androidx-ext:$koin_version"
+    implementation Deps.koin
+    implementation Deps.koinViewModel
+    implementation Deps.koinExt
 
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecyclektx_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecyclektx_version"
+    implementation Deps.lifecycleLiveData
+    implementation Deps.lifecycleViewModel
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-    implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
-    implementation "com.jakewharton.timber:timber:$timber_version"
+    implementation Deps.coroutines
+    implementation Deps.threeTen
+    implementation Deps.timber
 
-    testImplementation "junit:junit:$junit_version"
+    testImplementation Deps.junit
 }

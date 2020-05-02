@@ -3,19 +3,18 @@ apply from: '../../gradle/common.gradle'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation project(":libraries:core")
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation Deps.kotlinStdlib
+    implementation Deps.coroutines
 
-    implementation "org.koin:koin-android:$koin_version"
+    implementation Deps.koin
 
-    implementation "com.jakewharton.timber:timber:$timber_version"
-    implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
-    implementation "org.jsoup:jsoup:1.13.1"
+    implementation Deps.timber
+    implementation Deps.threeTen
 
-    implementation "androidx.core:core-ktx:$corektx_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation Deps.jsoup
 
-    testImplementation "junit:junit:$junit_version"
+    testImplementation Deps.junit
 }

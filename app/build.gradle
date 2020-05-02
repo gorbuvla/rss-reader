@@ -2,8 +2,6 @@ apply plugin: 'com.android.application'
 apply from: '../gradle/common.gradle'
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation project(":features:articles")
     implementation project(":features:feeds")
 
@@ -11,15 +9,13 @@ dependencies {
     implementation project(":libraries:database")
     implementation project(":libraries:rss")
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.core:core-ktx:$corektx_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation Deps.kotlinStdlib
+    implementation Deps.coreKtx
+    implementation Deps.appCompat
 
-    implementation "org.koin:koin-android:$koin_version"
+    implementation Deps.koin
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-    implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
-    implementation "com.jakewharton.timber:timber:$timber_version"
-
-    testImplementation "junit:junit:$junit_version"
+    implementation Deps.coroutines
+    implementation Deps.threeTen
+    implementation Deps.timber
 }
