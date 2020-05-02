@@ -1,7 +1,7 @@
 # RSS Reader App
 
 [![jCenter](https://img.shields.io/badge/Kotlin-1.3.72-green.svg)]()
-[![jCenter](https://img.shields.io/badge/Compose-dev09-green.svg)](https://developer.android.com/jetpack/compose)
+[![jCenter](https://img.shields.io/badge/Compose-dev10-green.svg)](https://developer.android.com/jetpack/compose)
 
 ## Project
 After trying out SwiftUI on simple project I was curious to try Compose.
@@ -19,7 +19,7 @@ Wondering what all these emojis are? Checkout [gitmoji](https://gitmoji.carloscu
 
 ## Structure
 
-Because of experimental compose compiler compatibility issues, app is split up into several modules.
+Because of experimental compose compiler compatibility issues (prior to dev10), app is split up into several modules.
 Each module is an Android Library and is designed in a way so that Compose, Room and experimental Flow api
 do not reside in single module.
 
@@ -46,7 +46,7 @@ Presentation related code which can be shared between features.
 
 ## Compose pitfalls
 
-- No other way to use Room & Flow with Compose than modularize the app 🤷‍
+- <s>No other way to use Room & Flow with Compose than modularize the app 🤷‍</s> Fixed with compose-dev10
 - [Issue](https://issuetracker.google.com/issues/150174792) General problem with lists. **VerticalScroller** is ok for limited amount of data, however when used to present list of articles it takes half day to be drawn.
 So using **AdapterList** is much better in this case, but it has its own pitfalls. Once list data is loaded and user starts scrolling, previously used composables for row items are not reused/disposed, which
 makes app leak like ones 🍑 after 🥛 + 🥒.
